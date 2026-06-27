@@ -3,7 +3,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
-import { type Movie, searchMovies } from "@/services/movies";
+import { searchMovies } from "@/services/movies";
+import type { Movie } from "@/types/movies";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
