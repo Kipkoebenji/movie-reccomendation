@@ -1,6 +1,6 @@
 import api from "./api";
 
-type Movie = {
+export type Movie = {
   id: number;
   title: string;
   overview: string;
