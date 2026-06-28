@@ -28,7 +28,10 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         <CardContent>
           <form action={signInWithEmail} className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium text-slate-700">
+              <label
+                htmlFor="email"
+                className="text-sm font-medium text-slate-700"
+              >
                 Email
               </label>
               <input
@@ -43,7 +46,10 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="password" className="text-sm font-medium text-slate-700">
+              <label
+                htmlFor="password"
+                className="text-sm font-medium text-slate-700"
+              >
                 Password
               </label>
               <input
@@ -70,7 +76,10 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
 
           <p className="mt-4 text-center text-sm text-slate-600">
             New here?{" "}
-            <Link href="/signup" className="font-semibold text-slate-900 hover:underline">
+            <Link
+              href="/signup"
+              className="font-semibold text-slate-900 hover:underline"
+            >
               Create an account
             </Link>
           </p>
