@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import { searchMovies } from "@/services/movies";
 import type { Movie } from "@/types/movies";
+import Header from "@/components/layout/(Header)/page";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -23,6 +24,7 @@ export default function Home() {
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-4xl flex-col gap-8 px-6 py-16">
+      <Header />
       <div className="space-y-3">
         <p className="text-sm uppercase tracking-[0.35em] text-slate-500">
           Movie search
