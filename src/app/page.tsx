@@ -23,7 +23,7 @@ export default function Home() {
   });
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-4xl flex-col gap-8 px-6 py-16">
+    <main className="mx-auto flex min-h-screen w-full max-w-4xl flex-col gap-8 px-6">
       <Header />
       <div className="space-y-3">
         <p className="text-sm uppercase tracking-[0.35em] text-slate-500">
