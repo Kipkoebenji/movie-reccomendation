@@ -6,6 +6,7 @@ import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import { searchMovies } from "@/services/movies";
 import type { Movie } from "@/types/movies";
 import Header from "@/components/layout/(Header)/Navbar";
+import Footer from "@/components/layout/(Footer)/Footer";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -78,6 +79,7 @@ export default function Home() {
         ))}
       </ul>
     </main>
+    <Footer />
     </>
   );
 }
