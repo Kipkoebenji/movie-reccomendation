@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import { searchMovies } from "@/services/movies";
 import type { Movie } from "@/types/movies";
-import Header from "@/components/layout/(Header)/page";
+import Header from "@/components/layout/(Header)/Navbar";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -23,6 +23,9 @@ export default function Home() {
   });
 
   return (
+    <>
+    <div className="fixed inset-0 -z-10 bg-[url(/_.jpeg)] bg-cover bg-center bg-no-repeat" />
+    <div className="fixed inset-0 -z-10 bg-black/60 backdrop-blur-sm" />
     <main className="mx-auto flex min-h-screen w-full max-w-4xl flex-col gap-8 px-6">
       <Header />
       <div className="space-y-3">
@@ -75,5 +78,6 @@ export default function Home() {
         ))}
       </ul>
     </main>
+    </>
   );
 }
