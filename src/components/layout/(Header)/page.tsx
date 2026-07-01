@@ -2,11 +2,11 @@ import Image from "next/image";
 
 export default function Header() {
   return (
-    <header>
+    <header className="text-white pt-3 ">
       <div className="flex flex-col">
         <div className="flex flex-row justify-between items-center ">
           <div>
-            <Image width={100} height={100} src="/logo.png" alt="Logo"></Image>
+            <Image className="bg-white rounded-full" width={50} height={50} src="/logo.png" alt="Logo"></Image>
           </div>
 
           <div>
@@ -15,10 +15,10 @@ export default function Header() {
               placeholder="Search movies..."
               name="search"
               id="search"
-              className="border rounded-3xl p-0.5 pl-3.5 mr-7.5"
+              className="border text-white rounded-3xl p-0.5 pl-3.5 mr-7.5"
             />
 
-            <button>Login</button>
+            <button className="hover:underline">Login</button>
           </div>
         </div>
 
