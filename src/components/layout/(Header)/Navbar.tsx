@@ -15,7 +15,7 @@ export default function Header() {
               placeholder="Search movies..."
               name="search"
               id="search"
-              className="border text-white rounded-3xl p-0.5 pl-3.5 mr-7.5"
+              className="border text-white border-white/10 rounded-3xl p-0.5 pl-3.5 mr-7.5"
             />
 
             <button className="hover:underline">Login</button>

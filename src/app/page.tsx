@@ -25,9 +25,10 @@ export default function Home() {
 
   return (
     <>
+    <main>
     <div className="fixed inset-0 -z-10 bg-[url(/_.jpeg)] bg-cover bg-center bg-no-repeat" />
     <div className="fixed inset-0 -z-10 bg-black/60 backdrop-blur-sm" />
-    <main className="mx-auto flex min-h-screen w-full max-w-4xl flex-col gap-8 px-6">
+    <section className="mx-auto flex min-h-screen w-full max-w-4xl flex-col gap-8 px-6">
       <Header />
       <div className="space-y-3">
         <p className="text-sm uppercase tracking-[0.35em] text-slate-500">
@@ -78,7 +79,10 @@ export default function Home() {
           </li>
         ))}
       </ul>
+    </section>
+    
     </main>
+
     <Footer />
     </>
   );
