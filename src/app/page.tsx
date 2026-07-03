@@ -109,7 +109,7 @@ export default function Home() {
                 alt="The Devil Princess poster"
                 width={400}
                 height={560}
-                className="w-full h-[420px] md:h-[560px] object-cover"
+                className="w-full h-105 md:h-140 object-cover"
               />
 
               {/* Book Now button sits on top of the poster */}
@@ -168,7 +168,7 @@ export default function Home() {
 
               <div className="mt-10 flex items-center gap-6">
                 <span className="text-xl font-semibold">Watch Trailer</span>
-                <button className="flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
+                <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
                   <Play size={16} fill="white" />
                   Play Now
                 </button>
