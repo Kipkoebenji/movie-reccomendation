@@ -1,11 +1,7 @@
 export default function Footer() {
   return (
-    <footer className="relative mx-auto w-full max-w-4xl overflow-hidden text-white">
-      <div className="absolute inset-0 bg-[url(/footer.jpeg)] bg-cover bg-center bg-no-repeat" />
-
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-
-      <div className="relative z-10">
+    <footer className="mx-auto w-full max-w-4xl overflow-hidden text-white">
+      <div>
         <div className="flex flex-row flex-wrap justify-center gap-10 px-6 py-10 text-center sm:text-left">
           <div>
             <h1 className="text-lg font-semibold">MY Movie APP</h1>
