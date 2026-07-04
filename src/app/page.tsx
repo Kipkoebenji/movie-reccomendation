@@ -186,6 +186,10 @@ export default function Home() {
             />
           </div>
         </section>
+
+        <section>
+          <h1>This is the next section</h1>
+        </section>
       </main>
 
       <Footer />
