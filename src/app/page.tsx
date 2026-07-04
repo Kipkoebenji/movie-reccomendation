@@ -190,6 +190,10 @@ export default function Home() {
         <section>
           <h1>This is the next section</h1>
         </section>
+
+         <section>
+          <h1>This is the next section</h1>
+        </section>
       </main>
 
       <Footer />
