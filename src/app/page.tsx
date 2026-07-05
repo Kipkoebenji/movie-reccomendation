@@ -189,10 +189,12 @@ export default function Home() {
 
         <section>
           <h1>This is the next section</h1>
+          <p>This will have the movies cards</p>
         </section>
 
          <section>
           <h1>This is the next section</h1>
+          <p>This will have latest news</p>
         </section>
 
          <section>
