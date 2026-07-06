@@ -9,6 +9,7 @@ import Image from "next/image";
 import Header from "@/components/layout/(Header)/Navbar";
 import Footer from "@/components/layout/(Footer)/Footer";
 import { Star, Play, Ticket } from "lucide-react";
+import Card from "@/components/ui/card";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -190,6 +191,7 @@ export default function Home() {
         <section>
           <h1>This is the next section</h1>
           <p>This will have the movies cards</p>
+          <Card/>
         </section>
 
          <section>
