@@ -9,7 +9,7 @@ import Image from "next/image";
 import Header from "@/components/layout/(Header)/Navbar";
 import Footer from "@/components/layout/(Footer)/Footer";
 import { Star, Play, Ticket } from "lucide-react";
-import Card from "@/components/ui/card";
+import {Card,  CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -191,7 +191,24 @@ export default function Home() {
         <section>
           <h1>This is the next section</h1>
           <p>This will have the movies cards</p>
-          <Card/>
+          <Card className="max-w-sm">
+      <CardHeader>
+        <h1>Welcome</h1>
+        <CardDescription>
+          This is a reusable card.
+        </CardDescription>
+      </CardHeader>
+
+      <CardContent>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        </p>
+      </CardContent>
+
+      <CardFooter>
+        Footer Content
+      </CardFooter>
+    </Card>
         </section>
 
          <section>
