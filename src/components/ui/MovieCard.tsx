@@ -45,7 +45,7 @@ export function MovieCard({ movie }: { movie: Movie }) {
         )}
 
         {/* Gradient overlay for legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/10 to-transparent" />
 
         {/* Rating badge */}
         <div className="absolute top-3 right-3 flex items-center gap-1 rounded-full bg-black/60 px-2 py-1 text-xs font-semibold text-yellow-400 backdrop-blur-sm">
