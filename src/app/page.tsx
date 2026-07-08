@@ -9,6 +9,7 @@ import Image from "next/image";
 import Header from "@/components/layout/(Header)/Navbar";
 import Footer from "@/components/layout/(Footer)/Footer";
 import { Star, Play, Ticket } from "lucide-react";
+import { MovieCard } from "@/components/ui/MovieCard";
 import {Card,  CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
 
 export default function Home() {
@@ -89,6 +90,13 @@ export default function Home() {
               </li>
             ))}
           </ul>
+          {/* <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+  {movies.map((movie) => (
+    <li key={movie.id}>
+      <MovieCard movie={movie} />
+    </li>
+  ))}
+</ul> */}
         </section>
 
         <section className="flex flex-row flex-wrap">
