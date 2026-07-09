@@ -10,7 +10,14 @@ import Header from "@/components/layout/(Header)/Navbar";
 import Footer from "@/components/layout/(Footer)/Footer";
 import { Star, Play, Ticket } from "lucide-react";
 import { MovieCard } from "@/components/ui/MovieCard";
-import {Card,  CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -199,33 +206,45 @@ export default function Home() {
         <section>
           <h1>This is the next section</h1>
           <p>This will have the movies cards</p>
+          <Card size="sm">
+            <CardHeader>
+              <CardTitle>Movie Title</CardTitle>
+              <CardDescription>Action • 2025</CardDescription>
+            </CardHeader>
+
+            <CardContent>This is the main content of the card.</CardContent>
+
+            <CardFooter>
+              <button>Watch Now</button>
+            </CardFooter>
+          </Card>
           <Card className="max-w-sm">
-      <CardHeader>
-        <h1>Welcome</h1>
-        <CardDescription>
-          This is a reusable card.
-        </CardDescription>
-      </CardHeader>
+            <CardHeader>
+              <CardTitle>Welcome</CardTitle>
+              <CardDescription>This is a reusable card.</CardDescription>
+            </CardHeader>
 
-      <CardContent>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        </p>
-      </CardContent>
+            <CardContent>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            </CardContent>
 
-      <CardFooter>
-        Footer Content
-      </CardFooter>
-    </Card>
+            <CardFooter>Footer Content</CardFooter>
+          </Card>
         </section>
 
-         <section>
-          <h1>This is the next section</h1>
-          <p>This will have latest news</p>
+        <section>
+          <CardHeader>
+            <CardTitle>This is the next section</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>This will have latest news</p>
+          </CardContent>
         </section>
 
-         <section>
-          <h1>This is the next section</h1>
+        <section>
+          <CardHeader>
+            <CardTitle>This is the next section</CardTitle>
+          </CardHeader>
         </section>
       </main>
 
