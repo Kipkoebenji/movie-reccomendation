@@ -97,16 +97,10 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          {/* <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-  {movies.map((movie) => (
-    <li key={movie.id}>
-      <MovieCard movie={movie} />
-    </li>
-  ))}
-</ul> */}
+          
         </section>
 
-        <section className="flex flex-row flex-wrap">
+        <section className="flex w-full max-w-4xl">
           
           <div className="relative flex flex-col md:flex-row items-start gap-8 rounded-3xl bg-neutral-900/70 backdrop-blur-md p-6 md:p-10">
             {/* Poster - overlaps upward out of the card */}
