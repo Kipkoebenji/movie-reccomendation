@@ -107,16 +107,7 @@ export default function Home() {
         </section>
 
         <section className="flex flex-row flex-wrap">
-          <div className="origin-left transform-[perspective(1000px)_rotateY(25deg)]">
-            <Image
-              className="w-auto"
-              width={180}
-              height={10}
-              src="/main.jpeg"
-              alt="Movie poster"
-            />
-          </div>
-
+          
           <div className="relative flex flex-col md:flex-row items-start gap-8 rounded-3xl bg-neutral-900/70 backdrop-blur-md p-6 md:p-10">
             {/* Poster - overlaps upward out of the card */}
             <div className="relative -mt-16 md:-mt-24 w-full md:w-[320px] shrink-0 rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
@@ -192,15 +183,6 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="origin-right transform-[perspective(1200px)_rotateY(-20deg)]">
-            <Image
-              className="w-auto"
-              width={180}
-              height={1}
-              src="/main.jpeg"
-              alt="Movie poster"
-            />
-          </div>
         </section>
 
         <section>
