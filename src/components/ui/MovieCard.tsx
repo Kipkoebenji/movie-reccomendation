@@ -4,11 +4,11 @@ import Image from "next/image";
 import { Button } from "./button";
 
 export interface Movie {
-  id: number;
+   id: number;
   title: string;
-  release_date: string;
   overview: string;
   poster_path: string | null;
+  release_date: string;
   vote_average: number;
 }
 
