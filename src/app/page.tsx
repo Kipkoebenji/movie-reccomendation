@@ -1,33 +1,12 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { useDebouncedValue } from "@/hooks/use-debounced-value";
-import { searchMovies } from "@/services/movies";
-import type { Movie } from "@/types/movies";
 import Image from "next/image";
 import Header from "@/components/layout/(Header)/Navbar";
 import Footer from "@/components/layout/(Footer)/Footer";
 import { Star, Play, Ticket } from "lucide-react";
-import { MovieCard } from "@/components/ui/MovieCard";
-
 
 export default function Home() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const debouncedQuery = useDebouncedValue(searchQuery.trim());
-
   const cast = ["/cast/1.jpg"];
-
-  const {
-    data: movies = [],
-    isFetching,
-    isError,
-  } = useQuery<Movie[]>({
-    queryKey: ["movies", "search", debouncedQuery],
-    queryFn: () => searchMovies(debouncedQuery),
-    enabled: debouncedQuery.length > 0,
-    placeholderData: (previousData) => previousData,
-  });
 
   return (
     <>
@@ -36,11 +15,9 @@ export default function Home() {
         <div className="fixed inset-0 -z-10 bg-black/60 backdrop-blur-sm" />
         <section className="mx-auto w-full max-w-4xl mb-20">
           <Header />
-                    
         </section>
 
         <section className="flex w-full max-w-4xl">
-          
           <div className="relative flex flex-col md:flex-row items-start gap-8 rounded-3xl bg-neutral-900/70 backdrop-blur-md p-6 md:p-10">
             {/* Poster - overlaps upward out of the card */}
             <div className="relative -mt-16 md:-mt-24 w-full md:w-[320px] shrink-0 rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
@@ -115,20 +92,15 @@ export default function Home() {
               </div>
             </div>
           </div>
-
         </section>
 
         <section>
           <h1>This is the next section</h1>
-          {movies[0] ? <MovieCard movie={movies[0]} /> : null}
         </section>
 
         <section>
-          
-            <p>This will have latest news</p>
-          
+          <p>This will have latest news</p>
         </section>
-
       </main>
 
       <Footer />
