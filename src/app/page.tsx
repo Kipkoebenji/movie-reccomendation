@@ -6,7 +6,7 @@ import Footer from "@/components/layout/(Footer)/Footer";
 import { Star, Play, Ticket } from "lucide-react";
 
 export default function Home() {
-  const cast = ["/cast/1.jpg"];
+  const cast = ["/cast1.jpg"];
 
   return (
     <>
@@ -17,7 +17,7 @@ export default function Home() {
           <Header />
         </section>
 
-        <section className="flex w-full max-w-4xl">
+        <section className="flex mx-auto w-full max-w-4xl">
           <div className="relative flex flex-col md:flex-row items-start gap-8 rounded-3xl bg-neutral-900/70 backdrop-blur-md p-6 md:p-10">
             {/* Poster - overlaps upward out of the card */}
             <div className="relative -mt-16 md:-mt-24 w-full md:w-[320px] shrink-0 rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
@@ -74,11 +74,12 @@ export default function Home() {
                       src={src}
                       alt={`Cast member ${i + 1}`}
                       fill
-                      className="object-cover"
+                      sizes="44px"
+                      className="object-cover m-1"
                     />
                   </div>
                 ))}
-                <div className="w-11 h-11 rounded-full ring-2 ring-neutral-900 bg-neutral-900 border border-pink-500 flex items-center justify-center text-pink-400 text-xs font-semibold">
+                <div className="w-11 h-11 rounded-full ring-2 ring-neutral-900 bg-neutral-900 border border-pink-500 flex items-center justify-center text-pink-400 text-xs font-semibold ml-5">
                   5+
                 </div>
               </div>
@@ -94,8 +95,84 @@ export default function Home() {
           </div>
         </section>
 
-        <section>
+        <section className="mx-auto w-full max-w-4xl mt-10">
           <h1>This is the next section</h1>
+          <div className="flex gap-5 flex-wrap">
+            <div>
+              <Image
+                src="/footer.jpeg"
+                alt="The Devil Princess poster"
+                width={200}
+                height={360}
+                className="rounded-lg"
+              />
+              <p className="m-3.5">This is spider-man</p>
+              <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
+                  <Play size={16} fill="white" />
+                  Play Now
+                </button>
+            </div>
+
+            <div>
+              <Image
+                src="/footer.jpeg"
+                alt="The Devil Princess poster"
+                width={200}
+                height={360}
+                className="rounded-lg"
+              />
+              <p className="m-3.5">This is spider-man</p>
+              <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
+                  <Play size={16} fill="white" />
+                  Play Now
+                </button>
+            </div>
+
+            <div>
+              <Image
+                src="/footer.jpeg"
+                alt="The Devil Princess poster"
+                width={200}
+                height={360}
+                className="rounded-lg"
+              />
+              <p className="m-3.5">This is spider-man</p>
+              <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
+                  <Play size={16} fill="white" />
+                  Play Now
+                </button>
+            </div>
+
+            <div>
+              <Image
+                src="/footer.jpeg"
+                alt="The Devil Princess poster"
+                width={200}
+                height={360}
+                className="rounded-lg"
+              />
+              <p className="m-3.5">This is spider-man</p>
+              <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
+                  <Play size={16} fill="white" />
+                  Play Now
+                </button>
+            </div>
+
+            <div>
+              <Image
+                src="/footer.jpeg"
+                alt="The Devil Princess poster"
+                width={200}
+                height={360}
+                className="rounded-lg"
+              />
+              <p className="m-3.5">This is spider-man</p>
+              <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
+                  <Play size={16} fill="white" />
+                  Play Now
+                </button>
+            </div>
+          </div>
         </section>
 
         <section>
