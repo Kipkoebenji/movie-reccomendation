@@ -34,7 +34,7 @@ export default function Home() {
       <main>
         <div className="fixed inset-0 -z-10 bg-[url(/_.jpeg)] bg-cover bg-center bg-no-repeat" />
         <div className="fixed inset-0 -z-10 bg-black/60 backdrop-blur-sm" />
-        <section className="mx-auto flex min-h-screen w-full max-w-4xl flex-col gap-8 px-6">
+        <section className="mx-auto w-full max-w-4xl mb-20">
           <Header />
                     
         </section>
