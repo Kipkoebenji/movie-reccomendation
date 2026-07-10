@@ -4,22 +4,22 @@ export default function Header() {
   return (
     <header className="text-white pt-3 ">
       <div className="flex flex-col">
-        <div className="flex flex-row justify-between items-center ">
+        <div className="flex flex-row  items-center ">
           <div>
             <Image className="bg-white rounded-full" width={50} height={50} src="/logo.png" alt="Logo"></Image>
           </div>
 
-          <div>
+          
             <input
               type="search"
               placeholder="Search movies..."
               name="search"
               id="search"
-              className="border text-white border-white/10 rounded-3xl p-0.5 pl-3.5 mr-7.5"
+              className="w-full h-15 border text-white border-white/10 rounded-3xl p-0.5 pl-3.5 ml-4 mr-7.5"
             />
 
             <button className="hover:underline">Login</button>
-          </div>
+          
         </div>
 
         <div className="flex flex-row justify-end gap-4 py-2">
