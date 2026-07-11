@@ -152,15 +152,12 @@ export default function MovieDetails(props: Partial<MovieDetailsProps> = {}) {
 
             {/* CTAs + share row */}
             <div className="flex flex-wrap items-center gap-3 pt-1">
-              <button className="flex items-center gap-2 rounded-lg bg-linear-to-r from-cyan-400 to-emerald-400 px-5 py-2.5 text-sm font-semibold text-black transition hover:brightness-110">
-                <Play className="size-4 fill-black" />
-                Watch Trailer
+              <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
+                  <Play size={16} fill="white" />
+                  Play Now
               </button>
 
-              <button className="flex items-center gap-2 rounded-lg bg-white/10 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-md ring-1 ring-white/15 transition hover:bg-white/20">
-                <Download className="size-4" />
-                More Info
-              </button>
+             
 
               <div className="ml-auto flex items-center gap-2 sm:ml-2">
                 <ShareIcon icon={<ExternalLink className="size-4" />} />
