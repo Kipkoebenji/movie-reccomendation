@@ -4,7 +4,6 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 import {
   Play,
-  Download,
   Star,
   Volume2,
   VolumeX,
