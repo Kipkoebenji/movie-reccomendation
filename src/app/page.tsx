@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import { getMovies } from "@/features/movies/services";
 import Header from "@/components/layout/(Header)/Navbar";
 import Footer from "@/components/layout/(Footer)/Footer";
 import { Star, Play, Ticket } from "lucide-react";
 
-export default function Home() {
+export default async function Home() {
   const cast = ["/cast1.jpg"];
+  const movies = await getMovies();
 
   return (
     <>
@@ -177,6 +179,11 @@ export default function Home() {
 
         <section>
           <p>This will have latest news</p>
+          {movies.results.map((movie) => (
+        <div key={movie.id}>
+          <h2>{movie.title}</h2>
+        </div>
+      ))}
         </section>
       </main>
 
