@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
-import QueryProvider from "@/components/providers/query-provider";
+import QueryProvider from "@/providers/query-provider";
 import type { ChildrenProps } from "@/types/shared";
 import "./globals.css";
 
