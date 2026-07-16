@@ -1,5 +1,5 @@
 import api from "@/services/api";
-import type { MoviesResponse } from "@/types/movies";
+import type { MoviesResponse } from "@/features/movies/types";
 
 export async function getMovies() {
   const response = await api.get<MoviesResponse>("/discover/movie", {
