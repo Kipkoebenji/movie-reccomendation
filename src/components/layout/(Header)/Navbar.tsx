@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
 import { searchMovies } from "@/services/movies";
-import type { Movie } from "@/types/movies";
+import type { Movie } from "@/features/movies/types";
 
 export default function Header() {
   const router = useRouter();
