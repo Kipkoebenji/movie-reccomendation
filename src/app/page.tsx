@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { getMovies } from "@/features/movies/services";
+import { getMovies, getPopularMovies } from "@/features/movies/services";
 import Header from "@/components/layout/(Header)/Navbar";
 import Footer from "@/components/layout/(Footer)/Footer";
 import { Star, Play, Ticket } from "lucide-react";
@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const cast = ["/cast1.jpg"];
   const [movies, setMovies] = useState<any[]>([]);
+  const [popularMovies, setPopularMovies] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -23,6 +24,21 @@ export default function Home() {
 
     fetchMovies();
   }, []);
+
+  useEffect(() => {
+    const fetchPopularMovies = async () => {
+      try {
+        const data = await getPopularMovies();
+        setPopularMovies(data.results ?? []);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchPopularMovies();
+  }, []);
+
+  const popularMoviesToDisplay = popularMovies.slice(1, 5);
 
   return (
     <>
@@ -38,8 +54,12 @@ export default function Home() {
             {/* Poster - overlaps upward out of the card */}
             <div className="relative -mt-16 md:-mt-24 w-full md:w-[320px] shrink-0 rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
               <Image
-                src="/footer.jpeg"
-                alt="The Devil Princess poster"
+                src={
+                  popularMoviesToDisplay[0]?.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${popularMoviesToDisplay[0].poster_path}`
+                    : "/footer.jpeg"
+                }
+                alt={popularMoviesToDisplay[0]?.title}
                 width={400}
                 height={560}
                 className="w-full h-105 md:h-140 object-cover"
@@ -55,28 +75,23 @@ export default function Home() {
             {/* Details */}
             <div className="flex-1 text-white pt-2">
               <h1 className="text-3xl md:text-4xl font-bold">
-                The Devil Princess
+                {popularMoviesToDisplay[0]?.title}
               </h1>
 
               <div className="mt-3 flex items-center gap-2">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star
-                    key={i}
-                    size={18}
-                    className="fill-yellow-400 text-yellow-400"
-                  />
-                ))}
-                <span className="ml-2 text-neutral-300 text-sm">
-                  180k voters
+                <Star size={18} className="fill-yellow-400 text-yellow-400" />
+
+                <span className="font-semibold">
+                  {popularMoviesToDisplay[0]?.vote_average.toFixed(1)}
+                </span>
+
+                <span className="text-neutral-300 text-sm">
+                  ({popularMoviesToDisplay[0]?.vote_count.toLocaleString()} votes)
                 </span>
               </div>
 
               <p className="mt-5 max-w-xl text-neutral-300 leading-relaxed">
-                She is a devil princess from the demon world. She grew up
-                sheltered by her parents and doesn&apos;t really know how to be
-                evil or any of the common actions. She is unable to cry due to
-                Keita&apos;s accidental first wish, despite needed for him to
-                wish&hellip;
+                {popularMoviesToDisplay[0]?.overview}
               </p>
 
               <h3 className="mt-8 text-xl font-semibold">Cast:</h3>
@@ -88,7 +103,7 @@ export default function Home() {
                   >
                     <Image
                       src={src}
-                      alt={`Cast member ${i + 1}`}
+                      alt="Cast member"
                       fill
                       sizes="44px"
                       className="object-cover m-1"

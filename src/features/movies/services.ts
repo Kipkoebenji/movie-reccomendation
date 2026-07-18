@@ -33,3 +33,14 @@ export async function getMovieDetails(params: { id: number }) {
   const response = await api.get(`/movie/${params.id}`);
   return response.data;
 }
+
+export async function getPopularMovies() {
+  const response = await api.get<MoviesResponse>("/movie/popular", {
+    params: {
+      language: "en-US",
+      page: 1,
+    },
+  });
+
+  return response.data;
+}
