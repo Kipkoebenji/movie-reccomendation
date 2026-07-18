@@ -9,13 +9,13 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const cast = ["/cast1.jpg"];
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
         const data = await getMovies();
-        setMovies(data);
+        setMovies(data.results ?? []);
       } catch (error) {
         console.error(error);
       }
@@ -112,93 +112,30 @@ export default function Home() {
         </section>
 
         <section className="mx-auto w-full max-w-4xl mt-10">
-          <h1>This is the next section</h1>
-          <div className="flex gap-5 flex-wrap">
-            <div>
-              <Image
-                src="/footer.jpeg"
-                alt="The Devil Princess poster"
-                width={200}
-                height={360}
-                className="rounded-lg"
-              />
-              <p className="m-3.5">This is spider-man</p>
-              <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
-                <Play size={16} fill="white" />
-                Play Now
-              </button>
-            </div>
-
-            <div>
-              <Image
-                src="/footer.jpeg"
-                alt="The Devil Princess poster"
-                width={200}
-                height={360}
-                className="rounded-lg"
-              />
-              <p className="m-3.5">This is spider-man</p>
-              <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
-                <Play size={16} fill="white" />
-                Play Now
-              </button>
-            </div>
-
-            <div>
-              <Image
-                src="/footer.jpeg"
-                alt="The Devil Princess poster"
-                width={200}
-                height={360}
-                className="rounded-lg"
-              />
-              <p className="m-3.5">This is spider-man</p>
-              <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
-                <Play size={16} fill="white" />
-                Play Now
-              </button>
-            </div>
-
-            <div>
-              <Image
-                src="/footer.jpeg"
-                alt="The Devil Princess poster"
-                width={200}
-                height={360}
-                className="rounded-lg"
-              />
-              <p className="m-3.5">This is spider-man</p>
-              <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
-                <Play size={16} fill="white" />
-                Play Now
-              </button>
-            </div>
-
-            <div>
-              <Image
-                src="/footer.jpeg"
-                alt="The Devil Princess poster"
-                width={200}
-                height={360}
-                className="rounded-lg"
-              />
-              <p className="m-3.5">This is spider-man</p>
-              <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
-                <Play size={16} fill="white" />
-                Play Now
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <section>
           <p>This will have latest movies</p>
 
-          {movies?.map((movie) => (
-            <div key={movie.id}>
-              <h2>{movie.title}</h2>
-            </div>
-          ))}
+          <div className="flex gap-5 flex-wrap">
+            {movies?.map((movie) => (
+              <div key={movie.id}>
+                <Image
+                  src={
+                    movie.poster_path
+                      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                      : "/footer.jpeg"
+                  }
+                  alt={movie.title}
+                  width={200}
+                  height={360}
+                  className="rounded-lg"
+                />
+                <p className="m-3.5">{movie.title}</p>
+                <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
+                  <Play size={16} fill="white" />
+                  Play Now
+                </button>
+              </div>
+            ))}
+          </div>
         </section>
       </main>
 

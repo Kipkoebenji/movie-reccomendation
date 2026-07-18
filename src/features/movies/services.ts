@@ -12,6 +12,7 @@ export async function getMovies() {
   });
 
   return response.data;
+  
 }
 
 export const searchMovies = async (query: string) => {
