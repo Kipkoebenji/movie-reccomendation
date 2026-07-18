@@ -112,11 +112,12 @@ export default function Home() {
         </section>
 
         <section className="mx-auto w-full max-w-4xl mt-10">
-          <p>This will have latest movies</p>
-
-          <div className="flex gap-5 flex-wrap">
+          <div className="flex flex-col items-center gap-8 md:flex-row md:flex-wrap md:justify-start md:items-start md:gap-5">
             {movies?.map((movie) => (
-              <div key={movie.id}>
+              <div
+                key={movie.id}
+                className="flex flex-col items-center md:items-start"
+              >
                 <Image
                   src={
                     movie.poster_path
@@ -128,7 +129,11 @@ export default function Home() {
                   height={360}
                   className="rounded-lg"
                 />
-                <p className="m-3.5">{movie.title}</p>
+
+                <p className="mt-3 mb-4 text-center md:text-left">
+                  {movie.title}
+                </p>
+
                 <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
                   <Play size={16} fill="white" />
                   Play Now
