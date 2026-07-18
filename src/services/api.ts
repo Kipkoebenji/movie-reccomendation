@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-const TMDB_ACCESS_TOKEN = process.env.NEXT_PUBLIC_TMDB_ACCESS_TOKEN;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const TMDB_ACCESS_TOKEN = process.env.TMDB_ACCESS_TOKEN;
 
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
