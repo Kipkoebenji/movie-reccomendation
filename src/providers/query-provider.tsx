@@ -10,7 +10,7 @@ export default function QueryProvider({ children }: ChildrenProps) {
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: 1000 * 60,
+            staleTime: 1000 * 60,  //makes sure data is read from cache for 1 minute before refetching
             refetchOnWindowFocus: false,
             retry: 1,
           },
