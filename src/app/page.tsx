@@ -6,6 +6,7 @@ import Header from "@/components/layout/(Header)/Navbar";
 import Footer from "@/components/layout/(Footer)/Footer";
 import { Star, Play, Ticket } from "lucide-react";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
   const cast = ["/cast1.jpg"];
@@ -59,7 +60,7 @@ export default function Home() {
                     ? `https://image.tmdb.org/t/p/w500${popularMoviesToDisplay[0].poster_path}`
                     : "/footer.jpeg"
                 }
-                alt={popularMoviesToDisplay[0]?.title}
+                alt="Movie Poster"
                 width={400}
                 height={560}
                 className="w-full h-105 md:h-140 object-cover"
@@ -149,10 +150,12 @@ export default function Home() {
                   {movie.title}
                 </p>
 
+                 <Link href={`/movies/${movie.id}`}> 
                 <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
                   <Play size={16} fill="white" />
                   Play Now
                 </button>
+                </Link>
               </div>
             ))}
           </div>
