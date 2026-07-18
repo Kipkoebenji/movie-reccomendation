@@ -3,8 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDebouncedValue } from "@/hooks/use-debounced-value";
-import { searchMovies } from "@/features/movies/services";
 import type { Movie } from "@/features/movies/types";
+import { movieSearchOptions } from "@/features/movies/queryProvider";
 
 export default function Header() {
   const router = useRouter();
@@ -16,16 +16,11 @@ export default function Header() {
 
   const debouncedQuery = useDebouncedValue(searchQuery.trim());
 
-  const {
-    data: movies = [],
-    isFetching,
-    isError,
-  } = useQuery<Movie[]>({
-    queryKey: ["movies", "search", debouncedQuery],
-    queryFn: () => searchMovies(debouncedQuery),
-    enabled: debouncedQuery.length > 0,
-    placeholderData: (previousData) => previousData,
-  });
+const {
+  data: movies = [],
+  isFetching,
+  isError,
+} = useQuery(movieSearchOptions(debouncedQuery));
 
   const showDropdown = isOpen && searchQuery.trim().length > 0;
 
