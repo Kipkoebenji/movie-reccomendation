@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { Movie } from "./types";
+import { MoviesResponse } from "./types";
 import { getMovies, searchMovies } from "./services";
 
-  const { data } = useQuery<Movie[]>({
+  const { data } = useQuery<MoviesResponse>({
     queryKey: ["movies"],
     queryFn: () => getMovies()
   });
