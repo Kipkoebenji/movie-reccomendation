@@ -5,10 +5,24 @@ import { getMovies } from "@/features/movies/services";
 import Header from "@/components/layout/(Header)/Navbar";
 import Footer from "@/components/layout/(Footer)/Footer";
 import { Star, Play, Ticket } from "lucide-react";
+import { useEffect, useState } from "react";
 
-export default async function Home() {
+export default function Home() {
   const cast = ["/cast1.jpg"];
-  const movies = await getMovies();
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const data = await getMovies();
+        setMovies(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchMovies();
+  }, []);
 
   return (
     <>
@@ -110,9 +124,9 @@ export default async function Home() {
               />
               <p className="m-3.5">This is spider-man</p>
               <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
-                  <Play size={16} fill="white" />
-                  Play Now
-                </button>
+                <Play size={16} fill="white" />
+                Play Now
+              </button>
             </div>
 
             <div>
@@ -125,9 +139,9 @@ export default async function Home() {
               />
               <p className="m-3.5">This is spider-man</p>
               <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
-                  <Play size={16} fill="white" />
-                  Play Now
-                </button>
+                <Play size={16} fill="white" />
+                Play Now
+              </button>
             </div>
 
             <div>
@@ -140,9 +154,9 @@ export default async function Home() {
               />
               <p className="m-3.5">This is spider-man</p>
               <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
-                  <Play size={16} fill="white" />
-                  Play Now
-                </button>
+                <Play size={16} fill="white" />
+                Play Now
+              </button>
             </div>
 
             <div>
@@ -155,9 +169,9 @@ export default async function Home() {
               />
               <p className="m-3.5">This is spider-man</p>
               <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
-                  <Play size={16} fill="white" />
-                  Play Now
-                </button>
+                <Play size={16} fill="white" />
+                Play Now
+              </button>
             </div>
 
             <div>
@@ -170,20 +184,21 @@ export default async function Home() {
               />
               <p className="m-3.5">This is spider-man</p>
               <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
-                  <Play size={16} fill="white" />
-                  Play Now
-                </button>
+                <Play size={16} fill="white" />
+                Play Now
+              </button>
             </div>
           </div>
         </section>
 
         <section>
-          <p>This will have latest news</p>
-          {movies.results.map((movie) => (
-        <div key={movie.id}>
-          <h2>{movie.title}</h2>
-        </div>
-      ))}
+          <p>This will have latest movies</p>
+
+          {movies?.map((movie) => (
+            <div key={movie.id}>
+              <h2>{movie.title}</h2>
+            </div>
+          ))}
         </section>
       </main>
 
