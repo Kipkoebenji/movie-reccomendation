@@ -1,9 +1,9 @@
-import api from "@/services/api";
+import tmdbApi from "@/services/tmdbApi";
 import type { MoviesResponse } from "@/features/movies/types";
 import type { SearchMoviesResponse } from "@/features/movies/types";
 
 export async function getMovies() {
-  const response = await api.get<MoviesResponse>("/discover/movie", {
+  const response = await tmdbApi.get<MoviesResponse>("/discover/movie", {
     params: {
       include_adult: false,
       language: "en-US",
@@ -16,7 +16,7 @@ export async function getMovies() {
 }
 
 export const searchMovies = async (query: string) => {
-  const response = await api.get<SearchMoviesResponse>("/search/movie", {
+  const response = await tmdbApi.get<SearchMoviesResponse>("/search/movie", {
     params: {
       query,
       include_adult: false,
@@ -30,12 +30,12 @@ export const searchMovies = async (query: string) => {
 
 
 export async function getMovieDetails(params: { id: number }) {
-  const response = await api.get(`/movie/${params.id}`);
+  const response = await tmdbApi.get(`/movie/${params.id}`);
   return response.data;
 }
 
 export async function getPopularMovies() {
-  const response = await api.get<MoviesResponse>("/movie/popular", {
+  const response = await tmdbApi.get<MoviesResponse>("/movie/popular", {
     params: {
       language: "en-US",
       page: 1,
