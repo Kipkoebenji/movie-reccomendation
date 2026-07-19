@@ -1,12 +1,9 @@
 import { queryOptions } from "@tanstack/react-query";
-import {
-  getMovies,
-  getPopularMovies,
-  searchMovies,
-} from "./client";
+import { getMovies, getPopularMovies, searchMovies } from "./client";
+import type { SearchMoviesResponse } from "./types";
 
 export function movieSearchOptions(query: string) {
-  return queryOptions({
+  return queryOptions<SearchMoviesResponse>({
     queryKey: ["movies", "search", query],
     queryFn: () => searchMovies(query),
     enabled: query.length > 0,
@@ -20,7 +17,6 @@ export function moviesOptions() {
     queryFn: getMovies,
   });
 }
-
 
 export function popularMoviesOptions() {
   return queryOptions({

@@ -1,46 +1,27 @@
 "use client";
 
 import Image from "next/image";
-import { getMovies, getPopularMovies } from "@/features/movies/client";
-// import { getPopularMovies } from "@/features/movies/services";
+import { useQuery } from "@tanstack/react-query";
+import {
+  moviesOptions,
+  popularMoviesOptions,
+} from "@/features/movies/queryProvider";
 import Header from "@/components/layout/(Header)/Navbar";
 import Footer from "@/components/layout/(Footer)/Footer";
 import { Star, Play, Ticket } from "lucide-react";
-import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function Home() {
   const cast = ["/cast1.jpg"];
-  const [movies, setMovies] = useState<any[]>([]);
-  const [popularMovies, setPopularMovies] = useState<any[]>([]);
 
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const data = await getMovies();
-        setMovies(data.results ?? []);
-      } catch (error) {
-        console.error(error);
-      }
-    };
 
-    fetchMovies();
-  }, []);
+ const { data: moviesData } = useQuery(moviesOptions());
 
-  useEffect(() => {
-    const fetchPopularMovies = async () => {
-      try {
-        const data = await getPopularMovies();
-        setPopularMovies(data.results ?? []);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+const { data: popularMoviesData } = useQuery(popularMoviesOptions());
 
-    fetchPopularMovies();
-  }, []);
+const movies = moviesData?.results ?? [];
 
-  const popularMoviesToDisplay = popularMovies.slice(1, 5);
+const popularMovies = popularMoviesData?.results ?? [];
 
   return (
     <>
@@ -57,8 +38,8 @@ export default function Home() {
             <div className="relative -mt-16 md:-mt-24 w-full md:w-[320px] shrink-0 rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
               <Image
                 src={
-                  popularMoviesToDisplay[0]?.poster_path
-                    ? `https://image.tmdb.org/t/p/w500${popularMoviesToDisplay[0].poster_path}`
+                  popularMovies[0]?.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${popularMovies[0].poster_path}`
                     : "/footer.jpeg"
                 }
                 alt="Movie Poster"
@@ -77,23 +58,23 @@ export default function Home() {
             {/* Details */}
             <div className="flex-1 text-white pt-2">
               <h1 className="text-3xl md:text-4xl font-bold">
-                {popularMoviesToDisplay[0]?.title}
+                {popularMovies[0]?.title}
               </h1>
 
               <div className="mt-3 flex items-center gap-2">
                 <Star size={18} className="fill-yellow-400 text-yellow-400" />
 
                 <span className="font-semibold">
-                  {popularMoviesToDisplay[0]?.vote_average.toFixed(1)}
+                  {popularMovies[0]?.vote_average.toFixed(1)}
                 </span>
 
                 <span className="text-neutral-300 text-sm">
-                  ({popularMoviesToDisplay[0]?.vote_count.toLocaleString()} votes)
+                  ({popularMovies[0]?.vote_count.toLocaleString()} votes)
                 </span>
               </div>
 
               <p className="mt-5 max-w-xl text-neutral-300 leading-relaxed">
-                {popularMoviesToDisplay[0]?.overview}
+                {popularMovies[0]?.overview}
               </p>
 
               <h3 className="mt-8 text-xl font-semibold">Cast:</h3>

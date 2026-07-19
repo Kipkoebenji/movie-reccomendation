@@ -16,18 +16,22 @@ export default function Header() {
 
   const debouncedQuery = useDebouncedValue(searchQuery.trim());
 
-const {
-  data: movies = [],
-  isFetching,
-  isError,
-} = useQuery(movieSearchOptions(debouncedQuery));
+  const {
+    data: moviesResponse,
+    isFetching,
+    isError,
+  } = useQuery(movieSearchOptions(debouncedQuery));
 
+  const movieResults: Movie[] = moviesResponse?.results ?? [];
   const showDropdown = isOpen && searchQuery.trim().length > 0;
 
   // close on outside click
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
         setIsOpen(false);
       }
     }
@@ -35,10 +39,10 @@ const {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // reset highlighted index whenever results change
+  // reset highlighted index whenever the search query changes
   useEffect(() => {
     setActiveIndex(-1);
-  }, [movies]);
+  }, [debouncedQuery]);
 
   function goToMovie(movie: Movie) {
     setIsOpen(false);
@@ -56,14 +60,14 @@ const {
 
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setActiveIndex((i) => Math.min(i + 1, movies.length - 1));
+      setActiveIndex((i) => Math.min(i + 1, movieResults.length - 1));
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setActiveIndex((i) => Math.max(i - 1, -1));
     } else if (e.key === "Enter") {
       e.preventDefault();
-      if (activeIndex >= 0 && movies[activeIndex]) {
-        goToMovie(movies[activeIndex]);
+      if (activeIndex >= 0 && movieResults[activeIndex]) {
+        goToMovie(movieResults[activeIndex]);
       } else if (searchQuery.trim()) {
         goToSearchResults(searchQuery.trim());
       }
@@ -77,7 +81,13 @@ const {
       <div className="flex flex-col">
         <div className="flex flex-row items-center">
           <div>
-            <Image className="bg-white rounded-full" width={50} height={50} src="/logo.png" alt="Logo" />
+            <Image
+              className="bg-white rounded-full"
+              width={50}
+              height={50}
+              src="/logo.png"
+              alt="Logo"
+            />
           </div>
 
           <div ref={containerRef} className="relative w-full ml-4 mr-7.5">
@@ -96,19 +106,28 @@ const {
 
             {showDropdown && (
               <div className="absolute top-full left-0 mt-2 w-full max-h-96 overflow-y-auto rounded-2xl border border-white/10 bg-black/80 backdrop-blur-xl shadow-xl z-50">
-                {isFetching && movies.length === 0 && (
-                  <div className="px-4 py-3 text-sm text-white/50">Searching…</div>
+                {isFetching && movieResults.length === 0 && (
+                  <div className="px-4 py-3 text-sm text-white/50">
+                    Searching…
+                  </div>
                 )}
 
                 {isError && (
-                  <div className="px-4 py-3 text-sm text-red-400">Something went wrong.</div>
+                  <div className="px-4 py-3 text-sm text-red-400">
+                    Something went wrong.
+                  </div>
                 )}
 
-                {!isFetching && !isError && movies.length === 0 && debouncedQuery.length > 0 && (
-                  <div className="px-4 py-3 text-sm text-white/50">No results for "{debouncedQuery}"</div>
-                )}
+                {!isFetching &&
+                  !isError &&
+                  movieResults.length === 0 &&
+                  debouncedQuery.length > 0 && (
+                    <div className="px-4 py-3 text-sm text-white/50">
+                      No results for "{debouncedQuery}"
+                    </div>
+                  )}
 
-                {movies.map((movie, index) => (
+                {movieResults.map((movie, index) => (
                   <button
                     key={movie.id}
                     onClick={() => goToMovie(movie)}
@@ -117,17 +136,20 @@ const {
                       index === activeIndex ? "bg-white/10" : "hover:bg-white/5"
                     }`}
                   >
-                    
                     <div className="min-w-0">
-                      <p className="truncate text-sm font-medium">{movie.title}</p>
+                      <p className="truncate text-sm font-medium">
+                        {movie.title}
+                      </p>
                       {movie.release_date && (
-                        <p className="text-xs text-white/50">{movie.release_date.slice(0, 4)}</p>
+                        <p className="text-xs text-white/50">
+                          {movie.release_date.slice(0, 4)}
+                        </p>
                       )}
                     </div>
                   </button>
                 ))}
 
-                {movies.length > 0 && (
+                {movieResults.length > 0 && (
                   <button
                     onClick={() => goToSearchResults(searchQuery.trim())}
                     className="w-full border-t border-white/10 px-4 py-2 text-left text-sm text-white/60 hover:bg-white/5"
@@ -142,7 +164,11 @@ const {
           <button className="hover:underline">Login</button>
         </div>
 
-        <div className={`flex flex-row justify-end gap-4 py-2} isFetching ? "display: none" : ""}`}>
+        <div
+          className={
+            isFetching ? "hidden" : "flex flex-row justify-end gap-4 py-2"
+          }
+        >
           <a href="#">Home</a>
           <a href="#">Movies</a>
           <a href="#">TV Shows</a>
