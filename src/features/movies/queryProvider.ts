@@ -13,3 +13,18 @@ export function movieSearchOptions(query: string) {
     placeholderData: (previousData) => previousData,
   });
 }
+
+export function moviesOptions() {
+  return queryOptions({
+    queryKey: ["movies"],
+    queryFn: getMovies,
+  });
+}
+
+
+export function popularMoviesOptions() {
+  return queryOptions({
+    queryKey: ["movies", "popular"],
+    queryFn: getPopularMovies,
+  });
+}
