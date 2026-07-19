@@ -1,5 +1,9 @@
 import { queryOptions } from "@tanstack/react-query";
-import { searchMovies } from "./services";
+import {
+  getMovies,
+  getPopularMovies,
+  searchMovies,
+} from "./client";
 
 export function movieSearchOptions(query: string) {
   return queryOptions({
