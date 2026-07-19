@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { getMovies } from "@/features/movies/client";
-import { getPopularMovies } from "@/features/movies/services";
+import { getMovies, getPopularMovies } from "@/features/movies/client";
+// import { getPopularMovies } from "@/features/movies/services";
 import Header from "@/components/layout/(Header)/Navbar";
 import Footer from "@/components/layout/(Footer)/Footer";
 import { Star, Play, Ticket } from "lucide-react";
