@@ -26,6 +26,5 @@ api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => Promise.reject(error),
 );
-console.log("API Base URL:", API_BASE_URL);
-console.log("TMDB Access Token:", ACCESS_TOKEN);
+
 export default api;
