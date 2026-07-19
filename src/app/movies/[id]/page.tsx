@@ -2,44 +2,28 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import { useQuery } from "@tanstack/react-query";
+import { movieDetailsOptions } from "@/features/movies/queryProvider";
 import { Play, Star, Volume2, VolumeX, ExternalLink } from "lucide-react";
 import { useParams } from "next/navigation";
-import { getMovieDetails } from "@/features/movies/services";
+
 import type { Movie } from "@/features/movies/types";
 
 export default function MovieDetails() {
   const { id } = useParams();
 
-  const [movie, setMovie] = useState<Movie | null>(null);
-
   const [muted, setMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
-  if (!id) return;
+  const { data: moviesData } = useQuery(movieDetailsOptions(Number(id)));
 
-  const fetchMovie = async () => {
-    try {
-      const data = await getMovieDetails({
-        id: Number(id),
-      });
-
-      setMovie(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  fetchMovie();
-}, [id]);
-
-if (!movie) {
-  return (
-    <main className="min-h-screen flex items-center justify-center bg-black text-white">
-      Loading...
-    </main>
-  );
-}
+  if (!moviesData) {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-black text-white">
+        Loading...
+      </main>
+    );
+  }
 
   return (
     <div className="relative w-full h-screen">
@@ -55,8 +39,10 @@ if (!movie) {
       </video>
 
       <div className="absolute top-0 left-0 w-full h-full bg-black/50 flex flex-col justify-end p-8">
-        <h1 className="text-4xl font-bold text-white mb-4">{movie?.title}</h1>
-        <p className="text-white mb-4">{movie?.overview}</p>
+        <h1 className="text-4xl font-bold text-white mb-4">
+          {moviesData?.title}
+        </h1>
+        <p className="text-white mb-4">{moviesData?.overview}</p>
         <div className="flex items-center gap-4">
           <button
             onClick={() => setMuted(!muted)}
