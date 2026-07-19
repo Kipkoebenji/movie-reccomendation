@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-const TMDB_ACCESS_TOKEN = process.env.TMDB_ACCESS_TOKEN;
+const ACCESS_TOKEN = process.env.TMDB_ACCESS_TOKEN;
 
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -13,8 +13,8 @@ const api: AxiosInstance = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    if (TMDB_ACCESS_TOKEN) {
-      config.headers.Authorization = `Bearer ${TMDB_ACCESS_TOKEN}`;
+    if (ACCESS_TOKEN) {
+      config.headers.Authorization = `Bearer ${ACCESS_TOKEN}`;
     }
 
     return config;
@@ -26,5 +26,6 @@ api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => Promise.reject(error),
 );
-
+console.log("API Base URL:", API_BASE_URL);
+console.log("TMDB Access Token:", ACCESS_TOKEN);
 export default api;
