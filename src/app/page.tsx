@@ -37,22 +37,13 @@ const popularMovies = popularMoviesData?.results ?? [];
             {/* Poster - overlaps upward out of the card */}
             <div className="relative -mt-16 md:-mt-24 w-full md:w-[320px] shrink-0 rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
               <Image
-                src={
-                  popularMovies[0]?.poster_path
-                    ? `https://image.tmdb.org/t/p/w500${popularMovies[0].poster_path}`
-                    : "/footer.jpeg"
-                }
+                src={`https://image.tmdb.org/t/p/w500${popularMovies[0]?.poster_path}`}
                 alt="Movie Poster"
                 width={400}
                 height={560}
                 className="w-full h-105 md:h-140 object-cover"
               />
-
-              {/* Book Now button sits on top of the poster */}
-              <button className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full bg-pink-600 hover:bg-pink-500 transition-colors px-6 py-3 text-sm font-semibold text-white shadow-lg">
-                <Ticket size={16} />
-                BOOK NOW
-              </button>
+             
             </div>
 
             {/* Details */}
@@ -99,11 +90,13 @@ const popularMovies = popularMoviesData?.results ?? [];
               </div>
 
               <div className="mt-10 flex items-center gap-6">
-                <span className="text-xl font-semibold">Watch Trailer</span>
+                <span className="text-xl font-semibold">Watch</span>
+                <Link href={`/movies/${popularMovies[0]?.id}`}>
                 <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
                   <Play size={16} fill="white" />
                   Play Now
                 </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -117,11 +110,7 @@ const popularMovies = popularMoviesData?.results ?? [];
                 className="flex flex-col items-center md:items-start"
               >
                 <Image
-                  src={
-                    movie.poster_path
-                      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                      : "/footer.jpeg"
-                  }
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.title}
                   width={200}
                   height={360}
