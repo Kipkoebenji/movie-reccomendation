@@ -8,20 +8,27 @@ import {
 } from "@/features/movies/queryProvider";
 import Header from "@/components/layout/(Header)/Navbar";
 import Footer from "@/components/layout/(Footer)/Footer";
-import { Star, Play, Ticket } from "lucide-react";
+import { Star, Play, TrendingUp, Flame, Clock3, Crown } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
   const cast = ["/cast1.jpg"];
 
+  const { data: moviesData } = useQuery(moviesOptions());
 
- const { data: moviesData } = useQuery(moviesOptions());
+  const { data: popularMoviesData, isLoading: popularLoading } = useQuery(
+    popularMoviesOptions(),
+  );
 
-const { data: popularMoviesData } = useQuery(popularMoviesOptions());
+  const movies = moviesData?.results ?? [];
 
-const movies = moviesData?.results ?? [];
+  const popularMovies = popularMoviesData?.results ?? [];
 
-const popularMovies = popularMoviesData?.results ?? [];
+  const featuredMovie = popularMovies[0];
+
+  if (!featuredMovie) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -43,7 +50,6 @@ const popularMovies = popularMoviesData?.results ?? [];
                 height={560}
                 className="w-full h-105 md:h-140 object-cover"
               />
-             
             </div>
 
             {/* Details */}
@@ -92,13 +98,54 @@ const popularMovies = popularMoviesData?.results ?? [];
               <div className="mt-10 flex items-center gap-6">
                 <span className="text-xl font-semibold">Watch</span>
                 <Link href={`/movies/${popularMovies[0]?.id}`}>
-                <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
-                  <Play size={16} fill="white" />
-                  Play Now
-                </button>
+                  <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
+                    <Play size={16} fill="white" />
+                    Play Now
+                  </button>
                 </Link>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section className="flex flex-col mt-10 mx-auto w-full max-w-4xl">
+          <div className="flex items-center justify-center gap-6 mb-5">
+            <div className="flex items-center gap-2 cursor-pointer hover:underline">
+              <TrendingUp className="h-5 w-5" />
+              <p className="text-xl font-semibold">Trending</p>
+            </div>
+
+            <div className="flex items-center gap-2 cursor-pointer hover:underline">
+              <Flame className="h-5 w-5" />
+              <p className="text-xl font-semibold">Popular</p>
+            </div>
+
+            <div className="flex items-center gap-2 cursor-pointer hover:underline">
+              <Clock3 className="h-5 w-5" />
+              <p className="text-xl font-semibold">Recent</p>
+            </div>
+
+            <div className="flex items-center gap-2 cursor-pointer hover:underline">
+              <Crown className="h-5 w-5" />
+              <p className="text-xl font-semibold">Premium</p>
+            </div>
+          </div>
+          <div className="flex items-center justify-center gap-6 mb-5">
+            <button className="rounded-full border border-fuchsia-500 bg-transparent px-6 py-3 text-sm font-semibold text-fuchsia-500 transition-all duration-300 hover:bg-linear-to-r hover:cursor-pointer hover:from-purple-500 hover:to-fuchsia-500 hover:text-white">
+              Action
+            </button>
+            <button className="rounded-full border border-fuchsia-500 bg-transparent px-6 py-3 text-sm font-semibold text-fuchsia-500 transition-all duration-300 hover:bg-linear-to-r hover:cursor-pointer hover:from-purple-500 hover:to-fuchsia-500 hover:text-white">
+              Adventure
+            </button>
+            <button className="rounded-full border border-fuchsia-500 bg-transparent px-6 py-3 text-sm font-semibold text-fuchsia-500 transition-all duration-300 hover:bg-linear-to-r hover:cursor-pointer hover:from-purple-500 hover:to-fuchsia-500 hover:text-white">
+              Animation
+            </button>
+            <button className="rounded-full border border-fuchsia-500 bg-transparent px-6 py-3 text-sm font-semibold text-fuchsia-500 transition-all duration-300 hover:bg-linear-to-r hover:cursor-pointer hover:from-purple-500 hover:to-fuchsia-500 hover:text-white">
+              Comedy
+            </button>
+            <button className="rounded-full border border-fuchsia-500 bg-transparent px-6 py-3 text-sm font-semibold text-fuchsia-500 transition-all duration-300 hover:bg-linear-to-r hover:cursor-pointer hover:from-purple-500 hover:to-fuchsia-500 hover:text-white">
+              Fiction
+            </button>
           </div>
         </section>
 
@@ -121,11 +168,11 @@ const popularMovies = popularMoviesData?.results ?? [];
                   {movie.title}
                 </p>
 
-                 <Link href={`/movies/${movie.id}`}> 
-                <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
-                  <Play size={16} fill="white" />
-                  Play Now
-                </button>
+                <Link href={`/movies/${movie.id}`}>
+                  <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
+                    <Play size={16} fill="white" />
+                    Play Now
+                  </button>
                 </Link>
               </div>
             ))}
