@@ -1,4 +1,4 @@
-import { getPopularMovies } from "@/features/movies/services";
+import { getPopularMovies } from "@/features/movies/server";
 import { NextResponse } from "next/server";
 
 export async function GET() {
