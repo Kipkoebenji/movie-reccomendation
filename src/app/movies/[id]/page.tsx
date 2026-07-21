@@ -7,7 +7,6 @@ import { movieDetailsOptions } from "@/features/movies/queryProvider";
 import { Play, Star, Volume2, VolumeX, ExternalLink } from "lucide-react";
 import { useParams } from "next/navigation";
 
-import type { Movie } from "@/features/movies/types";
 
 export default function MovieDetails() {
   const { id } = useParams();
