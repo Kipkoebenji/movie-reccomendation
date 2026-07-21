@@ -9,11 +9,9 @@ export default function MoviePage() {
   const [hovered, setHovered] = useState<number | null>(null);
   const [selected, setSelected] = useState<number | null>(null);
 
-  const img = (path: string) =>
-    `/main.jpeg`;
+  const img = (path: string) => `/main.jpeg`;
 
-  const backdrop = (path: string) =>
-    `/main.jpeg`;
+  const backdrop = (path: string) => `/main.jpeg`;
 
   const movie = {
     id: 1040148,
@@ -159,13 +157,9 @@ export default function MoviePage() {
 
           {/* Info */}
           <div className="pt-4 md:pt-40">
-            <h1 className="text-5xl font-bold text-white">
-              {movie.title}
-            </h1>
+            <h1 className="text-5xl font-bold text-white">{movie.title}</h1>
 
-            <p className="italic mt-2 text-blue-300">
-              "{movie.tagline}"
-            </p>
+            <p className="italic mt-2 text-blue-300">"{movie.tagline}"</p>
 
             <div className="flex gap-5 mt-5 text-zinc-300">
               <span>{movie.releaseYear}</span>
@@ -194,9 +188,7 @@ export default function MoviePage() {
 
             <hr className="my-6 border-white/10" />
 
-            <h2 className="text-white text-xl font-semibold">
-              Overview
-            </h2>
+            <h2 className="text-white text-xl font-semibold">Overview</h2>
 
             <p className="text-zinc-300 mt-2 leading-relaxed">
               {movie.overview}
@@ -210,10 +202,7 @@ export default function MoviePage() {
 
               <div className="flex gap-6 overflow-x-auto">
                 {movie.cast.map((member) => (
-                  <div
-                    key={member.id}
-                    className="w-24 shrink-0 text-center"
-                  >
+                  <div key={member.id} className="w-24 shrink-0 text-center">
                     <div className="relative size-16 rounded-full overflow-hidden">
                       <Image
                         src={member.profilePath}
