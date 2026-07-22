@@ -19,7 +19,17 @@ import { useParams } from "next/navigation";
 export default function MovieDetails() {
   const img = (path: string) => `/main.jpeg`;
   const movie = {
- 
+     id: 1040148,
+    title: "Moana",
+    tagline: "The ocean chose her for a reason.",
+    overview:
+      "Teenage Moana answers the Ocean's call and, for the first time, voyages beyond the reef of her island of Motunui with infamous demigod Maui on an unforgettable journey to restore prosperity to her people.",
+    backdropPath: img("/backdrop-placeholder.jpg"),
+    posterPath: img("/poster-placeholder.jpg"),
+    releaseYear: 2026,
+    runtimeMinutes: 115,
+    rating: 3,
+    genres: ["Family", "Fantasy", "Comedy", "Adventure"],
 
     cast: [
       {
@@ -99,7 +109,7 @@ export default function MovieDetails() {
       {/* Hero */}
       <section className="relative h-[70vh] min-h-105">
         <Image
-          src={`https://image.tmdb.org/t/p/w500${moviesData.backdropPath}`}
+          src={`https://image.tmdb.org/t/p/w500${moviesData.backdrop_path}`}
           alt=""
           fill
           priority
@@ -124,7 +134,7 @@ export default function MovieDetails() {
           <div>
             <div className="relative aspect-[2/3] rounded-2xl overflow-hidden">
               <Image
-                src={`https://image.tmdb.org/t/p/w500${moviesData.posterPath}`}
+                src={`https://image.tmdb.org/t/p/w500${moviesData.poster_path}`}
                 alt={moviesData.title}
                 fill
                 className="object-cover"
