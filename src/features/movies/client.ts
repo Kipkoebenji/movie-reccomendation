@@ -1,5 +1,5 @@
 import api from "@/services/api";
-import type { MoviesResponse, SearchMoviesResponse } from "./types";
+import type { MoviesResponse, SearchMoviesResponse, Movie } from "./types";
 
 export async function getMovies() {
   const response = await api.get<MoviesResponse>("/movies");
@@ -25,6 +25,6 @@ export const searchMovies = async (query: string) => {
 };
 
 export async function getMovieDetails(params: { id: number }) {
-  const response = await api.get(`/movies/${params.id}`);
+  const response = await api.get<Movie>(`/movies/${params.id}`);
   return response.data;
 }

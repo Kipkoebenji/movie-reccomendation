@@ -19,7 +19,7 @@ import { useParams } from "next/navigation";
 export default function MovieDetails() {
   const img = (path: string) => `/main.jpeg`;
   const movie = {
-     id: 1040148,
+    id: 1040148,
     title: "Moana",
     tagline: "The ocean chose her for a reason.",
     overview:
@@ -89,10 +89,10 @@ export default function MovieDetails() {
   };
   const { id } = useParams();
 
-    const [hovered, setHovered] = useState<number | null>(null);
+  const [hovered, setHovered] = useState<number | null>(null);
   const [selected, setSelected] = useState<number | null>(null);
 
- const active = hovered ?? selected ?? 0;
+  const active = hovered ?? selected ?? 0;
 
   const { data: moviesData } = useQuery(movieDetailsOptions(Number(id)));
 
@@ -271,10 +271,6 @@ export default function MovieDetails() {
           </div>
         </section>
       </div>
-
-      
     </main>
   );
 }
-
-

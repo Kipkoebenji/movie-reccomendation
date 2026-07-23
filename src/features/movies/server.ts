@@ -1,6 +1,6 @@
 import tmdbApi from "@/services/tmdbApi";
 import type { MoviesResponse } from "@/features/movies/types";
-import type { SearchMoviesResponse } from "@/features/movies/types";
+import type { SearchMoviesResponse, Movie } from "@/features/movies/types";
 
 export async function getMovies() {
   const response = await tmdbApi.get<MoviesResponse>("/discover/movie", {
@@ -28,7 +28,7 @@ export const searchMovies = async (query: string) => {
 };
 
 export async function getMovieDetails(params: { id: number }) {
-  const response = await tmdbApi.get(`/movie/${params.id}`);
+  const response = await tmdbApi.get<Movie>(`/movie/${params.id}`);
   return response.data;
 }
 
