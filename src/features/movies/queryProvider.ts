@@ -1,6 +1,22 @@
 import { queryOptions } from "@tanstack/react-query";
-import { getMovieDetails, getMovies, getPopularMovies, searchMovies } from "./client";
-import type { SearchMoviesResponse } from "./types";
+import {
+  getCast,
+  getGenreMovies,
+  getMovieDetails,
+  getMovies,
+  getPopularMovies,
+  getSimilarMovies,
+  getTopRatedMovies,
+  getUpcomingMovies,
+  searchMovies,
+} from "./client";
+import type {
+  CastResponse,
+  GenresResponse,
+  Movie,
+  SearchMoviesResponse,
+  SimilarMoviesResponse,
+} from "./types";
 
 export function movieSearchOptions(query: string) {
   return queryOptions<SearchMoviesResponse>({
@@ -26,8 +42,43 @@ export function popularMoviesOptions() {
 }
 
 export function movieDetailsOptions(id: number) {
-  return queryOptions({
+  return queryOptions<Movie>({
     queryKey: ["movies", "details", id],
     queryFn: () => getMovieDetails({ id }),
+  });
+}
+
+export function movieCastOptions(id: number) {
+  return queryOptions<CastResponse>({
+    queryKey: ["movies", "cast", id],
+    queryFn: () => getCast({ id }),
+  });
+}
+
+export function similarMoviesOptions(id: number) {
+  return queryOptions<SimilarMoviesResponse>({
+    queryKey: ["movies", "similar", id],
+    queryFn: () => getSimilarMovies({ id }),
+  });
+}
+
+export function movieGenreOptions() {
+  return queryOptions<GenresResponse>({
+    queryKey: ["movies", "genre"],
+    queryFn: () => getGenreMovies(),
+  });
+}
+
+export function topRatedMoviesOptions() {
+  return queryOptions({
+    queryKey: ["movies", "topRated"],
+    queryFn: () => getTopRatedMovies(),
+  });
+}
+
+export function upcomingMoviesOptions() {
+  return queryOptions({
+    queryKey: ["movies", "upcoming"],
+    queryFn: () => getUpcomingMovies(),
   });
 }

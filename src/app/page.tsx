@@ -8,20 +8,27 @@ import {
 } from "@/features/movies/queryProvider";
 import Header from "@/components/layout/(Header)/Navbar";
 import Footer from "@/components/layout/(Footer)/Footer";
-import { Star, Play, Ticket } from "lucide-react";
+import { Star, Play, TrendingUp, Flame, Clock3, Crown } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
   const cast = ["/cast1.jpg"];
 
+  const { data: moviesData } = useQuery(moviesOptions());
 
- const { data: moviesData } = useQuery(moviesOptions());
+  const { data: popularMoviesData, isLoading: popularLoading } = useQuery(
+    popularMoviesOptions(),
+  );
 
-const { data: popularMoviesData } = useQuery(popularMoviesOptions());
+  const movies = moviesData?.results ?? [];
 
-const movies = moviesData?.results ?? [];
+  const popularMovies = popularMoviesData?.results ?? [];
 
-const popularMovies = popularMoviesData?.results ?? [];
+  const featuredMovie = popularMovies[0];
+
+  if (!featuredMovie) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -37,22 +44,12 @@ const popularMovies = popularMoviesData?.results ?? [];
             {/* Poster - overlaps upward out of the card */}
             <div className="relative -mt-16 md:-mt-24 w-full md:w-[320px] shrink-0 rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
               <Image
-                src={
-                  popularMovies[0]?.poster_path
-                    ? `https://image.tmdb.org/t/p/w500${popularMovies[0].poster_path}`
-                    : "/footer.jpeg"
-                }
+                src={`https://image.tmdb.org/t/p/w500${popularMovies[0]?.poster_path}`}
                 alt="Movie Poster"
                 width={400}
                 height={560}
                 className="w-full h-105 md:h-140 object-cover"
               />
-
-              {/* Book Now button sits on top of the poster */}
-              <button className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full bg-pink-600 hover:bg-pink-500 transition-colors px-6 py-3 text-sm font-semibold text-white shadow-lg">
-                <Ticket size={16} />
-                BOOK NOW
-              </button>
             </div>
 
             {/* Details */}
@@ -99,44 +96,85 @@ const popularMovies = popularMoviesData?.results ?? [];
               </div>
 
               <div className="mt-10 flex items-center gap-6">
-                <span className="text-xl font-semibold">Watch Trailer</span>
-                <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
-                  <Play size={16} fill="white" />
-                  Play Now
-                </button>
+                <span className="text-xl font-semibold">Watch</span>
+                <Link href={`/movies/${popularMovies[0]?.id}`}>
+                  <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
+                    <Play size={16} fill="white" />
+                    Play Now
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-4xl mt-10">
-          <div className="flex flex-col items-center gap-8 md:flex-row md:flex-wrap md:justify-start md:items-start md:gap-5">
-            {movies?.map((movie) => (
-              <div
-                key={movie.id}
-                className="flex flex-col items-center md:items-start"
-              >
-                <Image
-                  src={
-                    movie.poster_path
-                      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                      : "/footer.jpeg"
-                  }
-                  alt={movie.title}
-                  width={200}
-                  height={360}
-                  className="rounded-lg"
-                />
+        <section className="flex flex-col mt-10 mx-auto w-full max-w-4xl">
+          <div className="flex items-center justify-center gap-6 mb-5">
+            <div className="flex items-center gap-2 cursor-pointer hover:underline">
+              <TrendingUp className="h-5 w-5" />
+              <p className="text-xl font-semibold">Trending</p>
+            </div>
 
-                <p className="mt-3 mb-4 text-center md:text-left">
+            <div className="flex items-center gap-2 cursor-pointer hover:underline">
+              <Flame className="h-5 w-5" />
+              <p className="text-xl font-semibold">Popular</p>
+            </div>
+
+            <div className="flex items-center gap-2 cursor-pointer hover:underline">
+              <Clock3 className="h-5 w-5" />
+              <p className="text-xl font-semibold">Recent</p>
+            </div>
+
+            <div className="flex items-center gap-2 cursor-pointer hover:underline">
+              <Crown className="h-5 w-5" />
+              <p className="text-xl font-semibold">Premium</p>
+            </div>
+          </div>
+          <div className="flex items-center justify-center gap-6 mb-5">
+            <button className="rounded-full border border-fuchsia-500 bg-transparent px-6 py-3 text-sm font-semibold text-fuchsia-500 transition-all duration-300 hover:bg-linear-to-r hover:cursor-pointer hover:from-purple-500 hover:to-fuchsia-500 hover:text-white">
+              Action
+            </button>
+            <button className="rounded-full border border-fuchsia-500 bg-transparent px-6 py-3 text-sm font-semibold text-fuchsia-500 transition-all duration-300 hover:bg-linear-to-r hover:cursor-pointer hover:from-purple-500 hover:to-fuchsia-500 hover:text-white">
+              Adventure
+            </button>
+            <button className="rounded-full border border-fuchsia-500 bg-transparent px-6 py-3 text-sm font-semibold text-fuchsia-500 transition-all duration-300 hover:bg-linear-to-r hover:cursor-pointer hover:from-purple-500 hover:to-fuchsia-500 hover:text-white">
+              Animation
+            </button>
+            <button className="rounded-full border border-fuchsia-500 bg-transparent px-6 py-3 text-sm font-semibold text-fuchsia-500 transition-all duration-300 hover:bg-linear-to-r hover:cursor-pointer hover:from-purple-500 hover:to-fuchsia-500 hover:text-white">
+              Comedy
+            </button>
+            <button className="rounded-full border border-fuchsia-500 bg-transparent px-6 py-3 text-sm font-semibold text-fuchsia-500 transition-all duration-300 hover:bg-linear-to-r hover:cursor-pointer hover:from-purple-500 hover:to-fuchsia-500 hover:text-white">
+              Fiction
+            </button>
+          </div>
+        </section>
+
+        <section className="mx-auto w-full max-w-4xl mt-10 px-4">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 md:grid-cols-4">
+            {movies?.map((movie) => (
+              <div key={movie.id} className="flex flex-col items-center">
+                <div className="relative w-full aspect-2/3 overflow-hidden rounded-lg">
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    alt={movie.title}
+                    fill
+                    sizes="(max-width: 640px) 45vw, (max-width: 768px) 30vw, 200px"
+                    className="object-cover"
+                  />
+                </div>
+
+                <p className="mt-3 mb-4 w-full text-center text-sm line-clamp-2 leading-snug">
                   {movie.title}
                 </p>
 
-                 <Link href={`/movies/${movie.id}`}> 
-                <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
-                  <Play size={16} fill="white" />
-                  Play Now
-                </button>
+                <Link
+                  href={`/movies/${movie.id}`}
+                  className="w-full flex justify-center"
+                >
+                  <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-5 py-2.5 text-sm font-semibold whitespace-nowrap">
+                    <Play size={16} fill="white" />
+                    Play Now
+                  </button>
                 </Link>
               </div>
             ))}
