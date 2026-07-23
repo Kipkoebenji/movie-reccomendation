@@ -3,28 +3,46 @@
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import {
+  movieCastOptions,
   moviesOptions,
   popularMoviesOptions,
 } from "@/features/movies/queryProvider";
 import Header from "@/components/layout/(Header)/Navbar";
 import Footer from "@/components/layout/(Footer)/Footer";
-import { Star, Play, TrendingUp, Flame, Clock3, Crown } from "lucide-react";
+import {
+  Star,
+  Play,
+  TrendingUp,
+  Flame,
+  Clock3,
+  Crown,
+  ImageOff,
+} from "lucide-react";
 import Link from "next/link";
 
-export default function Home() {
-  const cast = ["/cast1.jpg"];
+function ImagePlaceholder() {
+  return (
+    <div className="flex h-full w-full items-center justify-center bg-zinc-900 text-zinc-500">
+      <ImageOff className="size-10" aria-hidden="true" />
+    </div>
+  );
+}
 
+export default function Home() {
   const { data: moviesData } = useQuery(moviesOptions());
 
-  const { data: popularMoviesData, isLoading: popularLoading } = useQuery(
-    popularMoviesOptions(),
-  );
+  const { data: popularMoviesData } = useQuery(popularMoviesOptions());
 
   const movies = moviesData?.results ?? [];
 
   const popularMovies = popularMoviesData?.results ?? [];
 
   const featuredMovie = popularMovies[0];
+
+  const { data: castMoviesData } = useQuery({
+    ...movieCastOptions(featuredMovie?.id ?? 0),
+    enabled: Boolean(featuredMovie?.id),
+  });
 
   if (!featuredMovie) {
     return <div>Loading...</div>;
@@ -62,42 +80,55 @@ export default function Home() {
                 <Star size={18} className="fill-yellow-400 text-yellow-400" />
 
                 <span className="font-semibold">
-                  {popularMovies[0]?.vote_average.toFixed(1)}
+                  {featuredMovie.vote_average.toFixed(1)}
                 </span>
 
                 <span className="text-neutral-300 text-sm">
-                  ({popularMovies[0]?.vote_count.toLocaleString()} votes)
+                  ({featuredMovie.vote_count.toLocaleString()} votes)
                 </span>
               </div>
 
               <p className="mt-5 max-w-xl text-neutral-300 leading-relaxed">
-                {popularMovies[0]?.overview}
+                {featuredMovie.overview}
               </p>
 
               <h3 className="mt-8 text-xl font-semibold">Cast:</h3>
-              <div className="mt-3 flex items-center -space-x-3">
-                {cast.map((src, i) => (
-                  <div
-                    key={i}
-                    className="relative w-11 h-11 rounded-full ring-2 ring-neutral-900 overflow-hidden"
-                  >
-                    <Image
-                      src={src}
-                      alt="Cast member"
-                      fill
-                      sizes="44px"
-                      className="object-cover m-1"
-                    />
+              <div className="mt-3 flex gap-6 overflow-x-auto pb-2">
+                {castMoviesData?.cast.slice(0, 3).map((member) => (
+                  <div key={member.id} className="w-24 shrink-0 text-center">
+                    <div className="relative size-16 overflow-hidden rounded-full">
+                      {member.profile_path ? (
+                        <Image
+                          src={`https://image.tmdb.org/t/p/w500${member.profile_path}`}
+                          alt={member.name}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <ImagePlaceholder />
+                      )}
+                    </div>
+
+                    <p className="mt-2 truncate text-sm text-white">
+                      {member.name}
+                    </p>
+
+                    <p className="truncate text-xs text-neutral-400">
+                      {member.character}
+                    </p>
                   </div>
                 ))}
-                <div className="w-11 h-11 rounded-full ring-2 ring-neutral-900 bg-neutral-900 border border-pink-500 flex items-center justify-center text-pink-400 text-xs font-semibold ml-5">
-                  5+
-                </div>
+
+                {castMoviesData && castMoviesData.cast.length === 0 && (
+                  <p className="text-sm text-neutral-400">
+                    Cast information is unavailable.
+                  </p>
+                )}
               </div>
 
               <div className="mt-10 flex items-center gap-6">
                 <span className="text-xl font-semibold">Watch</span>
-                <Link href={`/movies/${popularMovies[0]?.id}`}>
+                <Link href={`/movies/${featuredMovie.id}`}>
                   <button className="flex items-center gap-2 rounded-full bg-linear-to-r from-purple-500 to-fuchsia-500 hover:opacity-90 transition-opacity px-6 py-3 text-sm font-semibold">
                     <Play size={16} fill="white" />
                     Play Now
