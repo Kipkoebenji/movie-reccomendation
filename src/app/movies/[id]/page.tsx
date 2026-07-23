@@ -1,92 +1,20 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
-import { movieDetailsOptions } from "@/features/movies/queryProvider";
+import Link from "next/link";
 import {
-  Play,
-  Star,
-  Volume2,
-  VolumeX,
-  ExternalLink,
-  Link,
-  ArrowLeft,
-  Clock,
-} from "lucide-react";
+  movieDetailsOptions,
+  similarMoviesOptions,
+  movieCastOptions,
+} from "@/features/movies/queryProvider";
+import { Star, ArrowLeft, Clock } from "lucide-react";
 import { useParams } from "next/navigation";
 
 export default function MovieDetails() {
-  const img = (path: string) => `/main.jpeg`;
-  const movie = {
-    id: 1040148,
-    title: "Moana",
-    tagline: "The ocean chose her for a reason.",
-    overview:
-      "Teenage Moana answers the Ocean's call and, for the first time, voyages beyond the reef of her island of Motunui with infamous demigod Maui on an unforgettable journey to restore prosperity to her people.",
-    backdropPath: img("/backdrop-placeholder.jpg"),
-    posterPath: img("/poster-placeholder.jpg"),
-    releaseYear: 2026,
-    runtimeMinutes: 115,
-    rating: 3,
-    genres: ["Family", "Fantasy", "Comedy", "Adventure"],
+  const img = () => `/main.jpeg`;
 
-    cast: [
-      {
-        id: 1,
-        name: "Catherine Laga'aia",
-        character: "Moana",
-        profilePath: img("/cast-1.jpg"),
-      },
-      {
-        id: 2,
-        name: "Dwayne Johnson",
-        character: "Maui",
-        profilePath: img("/cast-2.jpg"),
-      },
-      {
-        id: 3,
-        name: "Rena Owen",
-        character: "Gramma Tala",
-        profilePath: img("/cast-3.jpg"),
-      },
-      {
-        id: 4,
-        name: "John Tui",
-        character: "Chief Tui",
-        profilePath: img("/cast-4.jpg"),
-      },
-      {
-        id: 5,
-        name: "Frankie Adams",
-        character: "Sina",
-        profilePath: img("/cast-5.jpg"),
-      },
-    ],
-
-    recommendations: [
-      {
-        id: 2,
-        title: "Moana 2",
-        posterPath: img("/rec-1.jpg"),
-      },
-      {
-        id: 3,
-        title: "The Sea Beast",
-        posterPath: img("/rec-2.jpg"),
-      },
-      {
-        id: 4,
-        title: "Ruby Gillman",
-        posterPath: img("/rec-3.jpg"),
-      },
-      {
-        id: 5,
-        title: "Lilo & Stitch",
-        posterPath: img("/rec-4.jpg"),
-      },
-    ],
-  };
   const { id } = useParams();
 
   const [hovered, setHovered] = useState<number | null>(null);
@@ -95,6 +23,11 @@ export default function MovieDetails() {
   const active = hovered ?? selected ?? 0;
 
   const { data: moviesData } = useQuery(movieDetailsOptions(Number(id)));
+
+  const { data: similarMoviesData } = useQuery(
+    similarMoviesOptions(Number(id)),
+  );
+  const { data: castMoviesData } = useQuery(movieCastOptions(Number(id)));
 
   if (!moviesData) {
     return (
@@ -176,31 +109,35 @@ export default function MovieDetails() {
 
           {/* Info */}
           <div className="pt-4 md:pt-40">
-            <h1 className="text-5xl font-bold text-white">{movie.title}</h1>
+            <h1 className="text-5xl font-bold text-white">
+              {moviesData.title}
+            </h1>
 
-            <p className="italic mt-2 text-blue-300">"{movie.tagline}"</p>
+            <p className="italic mt-2 text-blue-300">
+              &ldquo;{moviesData.tagline}&rdquo;
+            </p>
 
             <div className="flex gap-5 mt-5 text-zinc-300">
-              <span>{movie.releaseYear}</span>
+              <span>{moviesData.release_date}</span>
 
               <span className="flex items-center gap-1">
                 <Clock className="size-4" />
-                {movie.runtimeMinutes} mins
+                {moviesData.runtime} mins
               </span>
 
               <span className="flex items-center gap-1">
                 <Star className="size-4 fill-amber-400 text-amber-400" />
-                {movie.rating}/5
+                4/5
               </span>
             </div>
 
             <div className="flex flex-wrap gap-2 mt-4">
-              {movie.genres.map((genre) => (
+              {moviesData.genres.map((genre) => (
                 <span
-                  key={genre}
+                  key={genre.id}
                   className="rounded-full bg-slate-800 px-3 py-1 text-sm text-white"
                 >
-                  {genre}
+                  {genre.name}
                 </span>
               ))}
             </div>
@@ -210,7 +147,7 @@ export default function MovieDetails() {
             <h2 className="text-white text-xl font-semibold">Overview</h2>
 
             <p className="text-zinc-300 mt-2 leading-relaxed">
-              {movie.overview}
+              {moviesData.overview}
             </p>
 
             {/* Cast */}
@@ -219,13 +156,17 @@ export default function MovieDetails() {
                 Top Cast
               </h2>
 
-              <div className="flex gap-6 overflow-x-auto">
-                {movie.cast.map((member) => (
+              <div className="flex gap-6 flex-nowrap overflow-hidden">
+                {castMoviesData?.cast.map((member) => (
                   <div key={member.id} className="w-24 shrink-0 text-center">
                     <div className="relative size-16 rounded-full overflow-hidden">
                       <Image
-                        src={`https://image.tmdb.org/t/p/w500${member.profilePath}`}
-                        alt="{member.name}"
+                        src={
+                          member.profile_path
+                            ? `https://image.tmdb.org/t/p/w500${member.profile_path}`
+                            : "/main.jpeg"
+                        }
+                        alt={member.name}
                         fill
                         className="object-cover"
                       />
@@ -252,11 +193,15 @@ export default function MovieDetails() {
           </h2>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-            {movie.recommendations.map((movie) => (
-              <Link key={movie.id} href={`/movie/${movie.id}`}>
+            {similarMoviesData?.results?.map((movie) => (
+              <Link key={movie.id} href={`/movies/${movie.id}`}>
                 <div className="relative aspect-2/3 rounded-lg overflow-hidden">
                   <Image
-                    src={`https://image.tmdb.org/t/p/w500${movie.posterPath}`}
+                    src={
+                      movie.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                        : "/main.jpeg"
+                    }
                     alt={movie.title}
                     fill
                     className="object-cover"
