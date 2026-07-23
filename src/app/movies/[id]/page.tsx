@@ -9,8 +9,16 @@ import {
   similarMoviesOptions,
   movieCastOptions,
 } from "@/features/movies/queryProvider";
-import { Star, ArrowLeft, Clock } from "lucide-react";
+import { Star, ArrowLeft, Clock, ImageOff } from "lucide-react";
 import { useParams } from "next/navigation";
+
+function ImagePlaceholder() {
+  return (
+    <div className="flex h-full w-full items-center justify-center bg-zinc-900 text-zinc-500">
+      <ImageOff className="size-10" aria-hidden="true" />
+    </div>
+  );
+}
 
 export default function MovieDetails() {
   const img = () => `/main.jpeg`;
@@ -41,13 +49,17 @@ export default function MovieDetails() {
     <main className="min-h-screen bg-black">
       {/* Hero */}
       <section className="relative h-[70vh] min-h-105">
-        <Image
-          src={`https://image.tmdb.org/t/p/w500${moviesData.backdrop_path}`}
-          alt=""
-          fill
-          priority
-          className="object-cover object-top"
-        />
+        {moviesData.backdrop_path ? (
+          <Image
+            src={`https://image.tmdb.org/t/p/w500${moviesData.backdrop_path}`}
+            alt=""
+            fill
+            priority
+            className="object-cover object-top"
+          />
+        ) : (
+          <ImagePlaceholder />
+        )}
 
         <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-black/10" />
         <div className="absolute inset-0 bg-linear-to-r from-black/60 via-transparent to-transparent" />
@@ -66,12 +78,16 @@ export default function MovieDetails() {
           {/* Poster */}
           <div>
             <div className="relative aspect-2/3 rounded-2xl overflow-hidden">
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${moviesData.poster_path}`}
-                alt={moviesData.title}
-                fill
-                className="object-cover"
-              />
+              {moviesData.poster_path ? (
+                <Image
+                  src={`https://image.tmdb.org/t/p/w500${moviesData.poster_path}`}
+                  alt={moviesData.title}
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <ImagePlaceholder />
+              )}
             </div>
 
             <button className="mt-4 w-full rounded-xl bg-white/10 py-3 text-white hover:bg-white/20">
@@ -156,20 +172,20 @@ export default function MovieDetails() {
                 Top Cast
               </h2>
 
-              <div className="flex gap-6 flex-nowrap overflow-hidden">
-                {castMoviesData?.cast.map((member) => (
+              <div className="flex gap-6 overflow-x-auto pb-2 scrollbar-hide">
+                {castMoviesData?.cast.slice(0, 8).map((member) => (
                   <div key={member.id} className="w-24 shrink-0 text-center">
                     <div className="relative size-16 rounded-full overflow-hidden">
-                      <Image
-                        src={
-                          member.profile_path
-                            ? `https://image.tmdb.org/t/p/w500${member.profile_path}`
-                            : "/main.jpeg"
-                        }
-                        alt={member.name}
-                        fill
-                        className="object-cover"
-                      />
+                      {member.profile_path ? (
+                        <Image
+                          src={`https://image.tmdb.org/t/p/w500${member.profile_path}`}
+                          alt={member.name}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <ImagePlaceholder />
+                      )}
                     </div>
 
                     <p className="mt-2 text-sm text-white truncate">
@@ -193,19 +209,19 @@ export default function MovieDetails() {
           </h2>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-            {similarMoviesData?.results?.map((movie) => (
+            {similarMoviesData?.results?.slice(0, 18).map((movie) => (
               <Link key={movie.id} href={`/movies/${movie.id}`}>
                 <div className="relative aspect-2/3 rounded-lg overflow-hidden">
-                  <Image
-                    src={
-                      movie.poster_path
-                        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                        : "/main.jpeg"
-                    }
-                    alt={movie.title}
-                    fill
-                    className="object-cover"
-                  />
+                  {movie.poster_path ? (
+                    <Image
+                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                      alt={movie.title}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <ImagePlaceholder />
+                  )}
                 </div>
 
                 <p className="mt-2 text-sm text-zinc-200 truncate">
