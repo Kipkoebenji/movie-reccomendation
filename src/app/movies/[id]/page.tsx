@@ -132,7 +132,7 @@ export default function MovieDetails() {
         <div className="max-w-6xl mx-auto grid md:grid-cols-[280px_1fr] gap-8">
           {/* Poster */}
           <div>
-            <div className="relative aspect-[2/3] rounded-2xl overflow-hidden">
+            <div className="relative aspect-2/3 rounded-2xl overflow-hidden">
               <Image
                 src={`https://image.tmdb.org/t/p/w500${moviesData.poster_path}`}
                 alt={moviesData.title}
@@ -254,7 +254,7 @@ export default function MovieDetails() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
             {movie.recommendations.map((movie) => (
               <Link key={movie.id} href={`/movie/${movie.id}`}>
-                <div className="relative aspect-[2/3] rounded-lg overflow-hidden">
+                <div className="relative aspect-2/3 rounded-lg overflow-hidden">
                   <Image
                     src={`https://image.tmdb.org/t/p/w500${movie.posterPath}`}
                     alt={movie.title}
