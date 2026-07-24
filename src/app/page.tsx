@@ -6,6 +6,8 @@ import {
   movieCastOptions,
   moviesOptions,
   popularMoviesOptions,
+  topRatedMoviesOptions,
+  upcomingMoviesOptions
 } from "@/features/movies/queryProvider";
 import Header from "@/components/layout/(Header)/Navbar";
 import Footer from "@/components/layout/(Footer)/Footer";
