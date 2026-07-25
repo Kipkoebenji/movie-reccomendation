@@ -78,8 +78,8 @@ export default function Header() {
 
   return (
     <header className="text-white pt-3">
-      <div className="flex flex-col">
-        <div className="flex flex-row items-center">
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 md:flex-row md:items-center">
           <div>
             <Image
               className="bg-white rounded-full"
@@ -90,7 +90,10 @@ export default function Header() {
             />
           </div>
 
-          <div ref={containerRef} className="relative w-full ml-4 mr-7.5">
+          <div
+            ref={containerRef}
+            className="relative w-full md:ml-4 md:mr-7.5"
+          >
             <input
               type="text"
               placeholder="Search movies..."
@@ -101,7 +104,7 @@ export default function Header() {
               }}
               onFocus={() => setIsOpen(true)}
               onKeyDown={handleKeyDown}
-              className="w-full h-15 border text-white border-white/10 rounded-3xl p-0.5 pl-3.5"
+              className="w-full h-12 md:h-15 border text-white border-white/10 rounded-3xl p-0.5 pl-3.5"
             />
 
             {showDropdown && (
@@ -161,12 +164,14 @@ export default function Header() {
             )}
           </div>
 
-          <button className="hover:underline">Login</button>
+          <button className="self-end hover:underline md:self-auto">Login</button>
         </div>
 
         <div
           className={
-            isFetching ? "hidden" : "flex flex-row justify-end gap-4 py-2"
+            isFetching
+              ? "hidden"
+              : "flex flex-wrap justify-center gap-4 py-2 text-sm md:justify-end"
           }
         >
           <a href="#">Home</a>

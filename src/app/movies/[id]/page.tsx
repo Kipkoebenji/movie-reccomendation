@@ -39,7 +39,7 @@ export default function MovieDetails() {
 
   if (!moviesData) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-black text-white">
+      <main className="min-h-screen flex items-center justify-center bg-black px-4 text-white">
         Loading...
       </main>
     );
@@ -48,7 +48,7 @@ export default function MovieDetails() {
   return (
     <main className="min-h-screen bg-black">
       {/* Hero */}
-      <section className="relative h-[70vh] min-h-105">
+      <section className="relative h-[45vh] sm:h-[55vh] lg:h-[70vh] min-h-80 sm:min-h-96 lg:min-h-105">
         {moviesData.backdrop_path ? (
           <Image
             src={`https://image.tmdb.org/t/p/w500${moviesData.backdrop_path}`}
@@ -66,15 +66,15 @@ export default function MovieDetails() {
 
         <Link
           href="/"
-          className="absolute top-6 left-6 flex items-center gap-2 rounded-full bg-black/50 px-4 py-2 text-white backdrop-blur"
+          className="absolute top-4 left-4 sm:top-6 sm:left-6 flex items-center gap-2 rounded-full bg-black/50 px-3 py-2 sm:px-4 text-sm sm:text-base text-white backdrop-blur"
         >
           <ArrowLeft className="size-4" />
           Back
         </Link>
       </section>
 
-      <div className="-mt-40 relative z-10 px-6 md:px-10">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-[280px_1fr] gap-8">
+      <div className="-mt-24 sm:-mt-32 md:-mt-40 relative z-10 px-4 sm:px-6 md:px-10">
+        <div className="max-w-6xl mx-auto grid gap-6 md:grid-cols-[280px_1fr] md:gap-8">
           {/* Poster */}
           <div>
             <div className="relative aspect-2/3 rounded-2xl overflow-hidden">
@@ -90,7 +90,7 @@ export default function MovieDetails() {
               )}
             </div>
 
-            <button className="mt-4 w-full rounded-xl bg-white/10 py-3 text-white hover:bg-white/20">
+            <button className="mt-4 w-full rounded-xl bg-white/10 py-3 text-sm sm:text-base text-white hover:bg-white/20">
               ♡ Add to Watchlist
             </button>
 
@@ -125,7 +125,7 @@ export default function MovieDetails() {
 
           {/* Info */}
           <div className="pt-4 md:pt-40">
-            <h1 className="text-5xl font-bold text-white">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
               {moviesData.title}
             </h1>
 
@@ -133,7 +133,7 @@ export default function MovieDetails() {
               &ldquo;{moviesData.tagline}&rdquo;
             </p>
 
-            <div className="flex gap-5 mt-5 text-zinc-300">
+            <div className="flex flex-wrap gap-3 sm:gap-5 mt-5 text-sm sm:text-base text-zinc-300">
               <span>{moviesData.release_date}</span>
 
               <span className="flex items-center gap-1">
@@ -162,7 +162,7 @@ export default function MovieDetails() {
 
             <h2 className="text-white text-xl font-semibold">Overview</h2>
 
-            <p className="text-zinc-300 mt-2 leading-relaxed">
+            <p className="text-sm sm:text-base text-zinc-300 mt-2 leading-relaxed">
               {moviesData.overview}
             </p>
 
@@ -172,9 +172,9 @@ export default function MovieDetails() {
                 Top Cast
               </h2>
 
-              <div className="flex gap-6 overflow-x-auto pb-2 scrollbar-hide">
+              <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-2 scrollbar-hide">
                 {castMoviesData?.cast.slice(0, 8).map((member) => (
-                  <div key={member.id} className="w-24 shrink-0 text-center">
+                  <div key={member.id} className="w-20 sm:w-24 shrink-0 text-center">
                     <div className="relative size-16 rounded-full overflow-hidden">
                       {member.profile_path ? (
                         <Image
@@ -203,12 +203,12 @@ export default function MovieDetails() {
         </div>
 
         {/* Recommendations */}
-        <section className="max-w-6xl mx-auto mt-12 pb-16">
+        <section className="max-w-6xl mx-auto mt-12 px-4 sm:px-0 pb-16">
           <h2 className="text-xl font-semibold text-white mb-4">
             More Like This
           </h2>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-6">
             {similarMoviesData?.results?.slice(0, 18).map((movie) => (
               <Link key={movie.id} href={`/movies/${movie.id}`}>
                 <div className="relative aspect-2/3 rounded-lg overflow-hidden">

@@ -16,7 +16,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   const errorMessage = params.error;
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-md items-center px-6 py-16">
+    <main className="mx-auto flex min-h-screen w-full max-w-md items-center px-4 py-10 sm:px-6 sm:py-16">
       <Card className="w-full border border-slate-200 bg-white/80 shadow-lg backdrop-blur">
         <CardHeader>
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-slate-500">
