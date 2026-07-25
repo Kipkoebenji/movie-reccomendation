@@ -7,7 +7,7 @@ import {
   moviesOptions,
   popularMoviesOptions,
   topRatedMoviesOptions,
-  upcomingMoviesOptions
+  upcomingMoviesOptions,
 } from "@/features/movies/queryProvider";
 import Header from "@/components/layout/(Header)/Navbar";
 import Footer from "@/components/layout/(Footer)/Footer";
@@ -38,6 +38,10 @@ export default function Home() {
   const movies = moviesData?.results ?? [];
 
   const popularMovies = popularMoviesData?.results ?? [];
+
+  const topRatedMovies = useQuery(topRatedMoviesOptions()).data?.results ?? [];
+
+  const upcomingMovies = useQuery(upcomingMoviesOptions()).data?.results ?? [];
 
   const featuredMovie = popularMovies[0];
 
@@ -145,7 +149,7 @@ export default function Home() {
           <div className="flex items-center justify-center gap-6 mb-5">
             <div className="flex items-center gap-2 cursor-pointer hover:underline">
               <TrendingUp className="h-5 w-5" />
-              <p className="text-xl font-semibold">Trending</p>
+              <p className="text-xl font-semibold">Top Rated</p>
             </div>
 
             <div className="flex items-center gap-2 cursor-pointer hover:underline">
@@ -155,12 +159,7 @@ export default function Home() {
 
             <div className="flex items-center gap-2 cursor-pointer hover:underline">
               <Clock3 className="h-5 w-5" />
-              <p className="text-xl font-semibold">Recent</p>
-            </div>
-
-            <div className="flex items-center gap-2 cursor-pointer hover:underline">
-              <Crown className="h-5 w-5" />
-              <p className="text-xl font-semibold">Premium</p>
+              <p className="text-xl font-semibold">Upcoming</p>
             </div>
           </div>
           <div className="flex items-center justify-center gap-6 mb-5">
