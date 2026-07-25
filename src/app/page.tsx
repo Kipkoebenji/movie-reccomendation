@@ -101,7 +101,10 @@ export default function Home() {
               <h3 className="mt-8 text-lg sm:text-xl font-semibold">Cast:</h3>
               <div className="mt-3 flex gap-4 sm:gap-6 overflow-x-auto pb-2">
                 {castMoviesData?.cast.slice(0, 3).map((member) => (
-                  <div key={member.id} className="w-20 sm:w-24 shrink-0 text-center">
+                  <div
+                    key={member.id}
+                    className="w-20 sm:w-24 shrink-0 text-center"
+                  >
                     <div className="relative size-16 overflow-hidden rounded-full">
                       {member.profile_path ? (
                         <Image

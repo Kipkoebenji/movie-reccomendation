@@ -90,10 +90,7 @@ export default function Header() {
             />
           </div>
 
-          <div
-            ref={containerRef}
-            className="relative w-full md:ml-4 md:mr-7.5"
-          >
+          <div ref={containerRef} className="relative w-full md:ml-4 md:mr-7.5">
             <input
               type="text"
               placeholder="Search movies..."
@@ -164,7 +161,9 @@ export default function Header() {
             )}
           </div>
 
-          <button className="self-end hover:underline md:self-auto">Login</button>
+          <button className="self-end hover:underline md:self-auto">
+            Login
+          </button>
         </div>
 
         <div

@@ -174,7 +174,10 @@ export default function MovieDetails() {
 
               <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-2 scrollbar-hide">
                 {castMoviesData?.cast.slice(0, 8).map((member) => (
-                  <div key={member.id} className="w-20 sm:w-24 shrink-0 text-center">
+                  <div
+                    key={member.id}
+                    className="w-20 sm:w-24 shrink-0 text-center"
+                  >
                     <div className="relative size-16 rounded-full overflow-hidden">
                       {member.profile_path ? (
                         <Image
