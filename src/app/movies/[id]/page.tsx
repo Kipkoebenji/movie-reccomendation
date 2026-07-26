@@ -47,7 +47,7 @@ export default function MovieDetails() {
 
   return (
     <main className="min-h-screen bg-black">
-      {/* Hero */}
+      {/* Hero  make it responsive*/}
       <section className="relative h-[45vh] sm:h-[55vh] lg:h-[70vh] min-h-80 sm:min-h-96 lg:min-h-105">
         {moviesData.backdrop_path ? (
           <Image
