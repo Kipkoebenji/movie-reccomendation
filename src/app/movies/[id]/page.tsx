@@ -76,7 +76,8 @@ export default function MovieDetails() {
       <div className="-mt-24 sm:-mt-32 md:-mt-40 relative z-10 px-4 sm:px-6 md:px-10">
         <div className="max-w-6xl mx-auto grid gap-6 md:grid-cols-[280px_1fr] md:gap-8">
           {/* Poster */}
-          <div>
+
+          <div className="mx-auto w-48 sm:w-60 md:w-full">
             <div className="relative aspect-2/3 rounded-2xl overflow-hidden">
               {moviesData.poster_path ? (
                 <Image
@@ -95,7 +96,7 @@ export default function MovieDetails() {
             </button>
 
             {/* Rating */}
-            <div className="mt-4 rounded-xl bg-white/10 p-4">
+            <div className="mt-4 rounded-xl bg-white/10 p-3 sm:p-4">
               <p className="text-center text-sm text-zinc-400 mb-3">
                 Rate this Movie
               </p>
@@ -124,7 +125,7 @@ export default function MovieDetails() {
           </div>
 
           {/* Info */}
-          <div className="pt-4 md:pt-40">
+          <div className="pt-4 md:pt-40 min-w-0">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
               {moviesData.title}
             </h1>
@@ -178,7 +179,7 @@ export default function MovieDetails() {
                     key={member.id}
                     className="w-20 sm:w-24 shrink-0 text-center"
                   >
-                    <div className="relative size-16 rounded-full overflow-hidden">
+                    <div className="relative size-14 sm:size-16 rounded-full overflow-hidden">
                       {member.profile_path ? (
                         <Image
                           src={`https://image.tmdb.org/t/p/w500${member.profile_path}`}
