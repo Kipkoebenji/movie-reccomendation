@@ -74,7 +74,7 @@ export default function MovieDetails() {
       </section>
 
       <div className="-mt-24 sm:-mt-32 md:-mt-40 relative z-10 px-4 sm:px-6 md:px-10">
-        <div className="max-w-6xl mx-auto grid gap-6 md:grid-cols-[280px_1fr] md:gap-8">
+        <div className="max-w-6xl mx-auto grid gap-6 md:grid-cols-[280px_1fr] md:gap-8 min-w-0">
           {/* Poster */}
 
           <div className="mx-auto w-48 sm:w-60 md:w-full">
@@ -163,7 +163,7 @@ export default function MovieDetails() {
 
             <h2 className="text-white text-xl font-semibold">Overview</h2>
 
-            <p className="text-sm sm:text-base text-zinc-300 mt-2 leading-relaxed">
+            <p className="text-sm sm:text-base text-zinc-300 mt-2 leading-relaxed wrap-break-word">
               {moviesData.overview}
             </p>
 
