@@ -35,6 +35,12 @@ export default function Home() {
 
   const { data: popularMoviesData } = useQuery(popularMoviesOptions());
 
+  let clicked = false;
+
+  if(!clicked){
+    let data = 
+  }
+
   const movies = moviesData?.results ?? [];
 
   const popularMovies = popularMoviesData?.results ?? [];
